@@ -8,10 +8,10 @@
 		<version>2.5.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>pl.coderslab</groupId>
+	<groupId>pl.basicstuff</groupId>
 	<artifactId>projektkoncowy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>projektkoncowy</name>
+	<name>DM-CompanionApp</name>
 	<description>Schemat projektu koncowego</description>
 	<properties>
 		<java.version>11</java.version>

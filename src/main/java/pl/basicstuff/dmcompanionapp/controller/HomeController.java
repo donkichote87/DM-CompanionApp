@@ -1,4 +1,4 @@
-package pl.coderslab.projektkoncowy.controller;
+package pl.basicstuff.dmcompanionapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

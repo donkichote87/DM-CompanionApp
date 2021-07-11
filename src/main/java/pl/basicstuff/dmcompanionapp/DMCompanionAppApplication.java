@@ -1,13 +1,13 @@
-package pl.coderslab.projektkoncowy;
+package pl.basicstuff.dmcompanionapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjektkoncowyApplication {
+public class DMCompanionAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjektkoncowyApplication.class, args);
+		SpringApplication.run(DMCompanionAppApplication.class, args);
 	}
 
 }
