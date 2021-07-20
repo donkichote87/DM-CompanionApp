@@ -24,8 +24,7 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         User user = userService.findByUserName(username);
         if (user == null) {throw new UsernameNotFoundException(username); }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        user.getRoles().forEach(r ->
-                grantedAuthorities.add(new SimpleGrantedAuthority(r.getName())));
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
         return new CurrentUser(user.getUsername(),user.getPassword(),
                 grantedAuthorities, user);
     }

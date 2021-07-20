@@ -4,7 +4,6 @@ import lombok.Data;
 import pl.basicstuff.dmcompanionapp.role.Role;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
@@ -18,9 +17,7 @@ public class User {
     private String username;
     private String password;
     private int enabled;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Role role;
 
 }
