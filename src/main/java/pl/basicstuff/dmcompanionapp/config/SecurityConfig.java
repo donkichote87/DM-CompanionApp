@@ -1,5 +1,6 @@
 package pl.basicstuff.dmcompanionapp.config;
 
+import net.bytebuddy.utility.RandomString;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/login").not().hasAnyRole("USER","ADMIN")
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/")
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error="+ RandomString.make(5))
                 .and().logout().logoutSuccessUrl("/")
                 .permitAll()
                 .and().exceptionHandling().accessDeniedPage("/403");

@@ -6,19 +6,54 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/views/app/header.jsp"%>
+<%@include file="/WEB-INF/views/app/header.jsp" %>
+<c:if test="${not empty verify}">
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>${verify}</strong>
+    </div>
+</c:if>
+<c:if test="${not empty userEmailExist}">
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>${userEmailExist}</strong>
+    </div>
+</c:if>
+<c:if test="${not empty userLoginExist}">
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>${userLoginExist}</strong>
+    </div>
+</c:if>
+<c:if test="${not empty verifySuccess}">
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>${verifySuccess}</strong>
+    </div>
+</c:if>
+<c:if test="${not empty verifyFail}">
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>${verifyFail}</strong>
+    </div>
+</c:if>
 <div class="container">
     <div class="row">
         <div class="col-sm">
             <br><br>
-            <div class="card border-secondary mb-3" style="max-width: 20rem;">
-                <div class="card-header">Logowanie</div>
+            <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                <div class="card-header"><spring:message code="login.login"/></div>
                 <div class="card-body">
-                    <form method="post">
-                        <div style="display: flex; justify-content: center"><label> Login: <br><input type="text" name="username"/> </label></div>
-                        <div style="display: flex; justify-content: center"><label> Hasło: <br><input type="password" name="password"/> </label></div>
+                    <form method="post" action="login">
+                        <div style="display: flex; justify-content: center"><label><spring:message code="user.name"/>: <br><input type="text" name="username"/>
+                        </label></div>
+                        <div style="display: flex; justify-content: center"><label><spring:message code="user.password"/>: <br><input type="password" name="password"/>
+                        </label></div>
+                        <c:if test="${not empty param.error}">
+                            <p class=error><spring:message code="login.error"/></p>
+                        </c:if>
                         <br>
-                        <div style="display: flex; justify-content: center"><input type="submit" value="Zaloguj"/></div>
+                        <div style="display: flex; justify-content: center"><input type="submit" value="<spring:message code="login.signIn"/>"/></div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
                 </div>
@@ -26,24 +61,32 @@
         </div>
         <div class="col-sm">
             <br><br>
-            <div class="card border-secondary mb-3" style="max-width: 20rem;">
-                <div class="card-header">Rejestracja</div>
+            <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                <div class="card-header"><spring:message code="login.register"/></div>
                 <div class="card-body">
-                    <form method="post">
-                        <div style="display: flex; justify-content: center"><label> Login: <br><input type="text" name="username"/> </label></div>
-                        <div style="display: flex; justify-content: center"><label> Email: <br><input type="email" name="email"/> </label></div>
-                        <div style="display: flex; justify-content: center"><label> Hasło: <br><input type="password" name="password"/> </label></div>
-                        <div style="display: flex; justify-content: center"><label> Powtórz Hasło: <br><input type="password" name="password"/> </label></div>
-                        <br>
-                        <div style="display: flex; justify-content: center"><input type="submit" value="Zaloguj"/></div>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    </form>
-                </div>
+                    <form:form method="post" action="register" modelAttribute="user">
+                    <div style="display: flex; justify-content: center"><label><spring:message code="user.name"/>: <br><form:input path="username"/>
+                    </label></div>
+                    <form:errors path="username" cssClass="error"/>
+                    <div style="display: flex; justify-content: center"><label><spring:message code="user.email"/>: <br><form:input path="email"/>
+                    </label></div>
+                    <form:errors path="email" cssClass="error"/>
+                    <div style="display: flex; justify-content: center"><label><spring:message code="user.password"/>: <br><form:password
+                            path="password"/> </label></div>
+                    <form:errors path="password" cssClass="error"/>
+                    <div style="display: flex; justify-content: center"><label><spring:message code="user.passwordRepeat"/>: <br><input
+                            type="password" name="passwordConfirm"/> </label></div>
+                        <p class=error>${errorPassword}</p>
+
+                <br>
+                <div style="display: flex; justify-content: center"><input type="submit" value="<spring:message code="login.signup"/>"/></div>
+
+                </form:form>
             </div>
         </div>
     </div>
 </div>
+</div>
 
 
-
-<%@include file="/WEB-INF/views/app/footer.jsp"%>
+<%@include file="/WEB-INF/views/app/footer.jsp" %>
