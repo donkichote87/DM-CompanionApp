@@ -32,7 +32,6 @@ public class LoginController {
     }
 
 
-
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());

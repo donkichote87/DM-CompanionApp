@@ -45,15 +45,19 @@
                 <div class="card-header"><spring:message code="login.login"/></div>
                 <div class="card-body">
                     <form method="post" action="login">
-                        <div style="display: flex; justify-content: center"><label><spring:message code="user.name"/>: <br><input type="text" name="username"/>
+                        <div style="display: flex; justify-content: center"><label><spring:message code="user.name"/>:
+                            <br><input type="text" name="username"/>
                         </label></div>
-                        <div style="display: flex; justify-content: center"><label><spring:message code="user.password"/>: <br><input type="password" name="password"/>
+                        <div style="display: flex; justify-content: center"><label><spring:message
+                                code="user.password"/>: <br><input type="password" name="password"/>
                         </label></div>
                         <c:if test="${not empty param.error}">
                             <p class=error><spring:message code="login.error"/></p>
                         </c:if>
                         <br>
-                        <div style="display: flex; justify-content: center"><input type="submit" value="<spring:message code="login.signIn"/>"/></div>
+                        <div style="display: flex; justify-content: center"><input type="submit"
+                                                                                   value="<spring:message code="login.signIn"/>"/>
+                        </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
                 </div>
@@ -65,27 +69,33 @@
                 <div class="card-header"><spring:message code="login.register"/></div>
                 <div class="card-body">
                     <form:form method="post" action="register" modelAttribute="user">
-                    <div style="display: flex; justify-content: center"><label><spring:message code="user.name"/>: <br><form:input path="username"/>
-                    </label></div>
-                    <form:errors path="username" cssClass="error"/>
-                    <div style="display: flex; justify-content: center"><label><spring:message code="user.email"/>: <br><form:input path="email"/>
-                    </label></div>
-                    <form:errors path="email" cssClass="error"/>
-                    <div style="display: flex; justify-content: center"><label><spring:message code="user.password"/>: <br><form:password
-                            path="password"/> </label></div>
-                    <form:errors path="password" cssClass="error"/>
-                    <div style="display: flex; justify-content: center"><label><spring:message code="user.passwordRepeat"/>: <br><input
-                            type="password" name="passwordConfirm"/> </label></div>
+                        <div style="display: flex; justify-content: center"><label><spring:message code="user.name"/>:
+                            <br><form:input path="username"/>
+                        </label></div>
+                        <form:errors path="username" cssClass="error"/>
+                        <div style="display: flex; justify-content: center"><label><spring:message code="user.email"/>:
+                            <br><form:input path="email"/>
+                        </label></div>
+                        <form:errors path="email" cssClass="error"/>
+                        <div style="display: flex; justify-content: center"><label><spring:message
+                                code="user.password"/>: <br><form:password
+                                path="password"/> </label></div>
+                        <form:errors path="password" cssClass="error"/>
+                        <div style="display: flex; justify-content: center"><label><spring:message
+                                code="user.passwordRepeat"/>: <br><input
+                                type="password" name="passwordConfirm"/> </label></div>
                         <p class=error>${errorPassword}</p>
 
-                <br>
-                <div style="display: flex; justify-content: center"><input type="submit" value="<spring:message code="login.signup"/>"/></div>
+                        <br>
+                        <div style="display: flex; justify-content: center"><input type="submit"
+                                                                                   value="<spring:message code="login.signup"/>"/>
+                        </div>
 
-                </form:form>
+                    </form:form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 

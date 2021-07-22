@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DMCompanionAppApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DMCompanionAppApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DMCompanionAppApplication.class, args);
+    }
 
 }

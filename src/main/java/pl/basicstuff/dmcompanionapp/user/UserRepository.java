@@ -10,7 +10,9 @@ import javax.transaction.Transactional;
 @Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
+
     User findByEmail(String email);
+
     User findUserById(Long id);
 
     @Query("SELECT u FROM User u WHERE u.verificationCode = ?1")
