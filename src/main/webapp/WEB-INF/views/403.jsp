@@ -2,6 +2,6 @@
 <%@include file="/WEB-INF/views/app/header.jsp" %>
 <br><br>
 <div style="display: flex; justify-content: center; align-items: center;">
-    <img src="images/gandalf.jpg" style="border: 5px solid #C3B091;"/>
+    <img src="/images/gandalf.jpg" style="border: 5px solid #C3B091;" alt="<spring:message code="403.message"/>"/>
 </div>
 <%@include file="/WEB-INF/views/app/footer.jsp" %>

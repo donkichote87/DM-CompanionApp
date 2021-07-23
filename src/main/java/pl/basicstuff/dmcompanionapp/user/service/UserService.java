@@ -39,11 +39,11 @@ public class UserService {
         String toAddress = user.getEmail();
         String fromAddress = "dungeonmaster.companion.app@gmail.com";
         String senderName = "DM-Companion App";
-        String subject = "Please verify your registration";
-        String content = "Dear [[name]],<br>"
-                + "Please click the link below to verify your registration:<br>"
+        String subject = "Potwierdź swoją rejestrację";
+        String content = "Hej [[name]],<br>"
+                + "Kliknij w poniższy link aby potwierdzić swoją rejestrację:<br>"
                 + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
-                + "Thank you,<br>"
+                + "Pozdrawiamy!<br>"
                 + "DM-Companion App.";
 
         MimeMessage message = mailSender.createMimeMessage();
@@ -91,7 +91,13 @@ public class UserService {
         return userRepository.findUserById(id);
     }
 
-    public void updateUser(User user) {
+    public void updatePassword(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
+    public void updateName(User user) {
+        user.setUsername(user.getUsername());
         userRepository.save(user);
     }
 

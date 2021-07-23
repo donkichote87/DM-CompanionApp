@@ -87,8 +87,7 @@
                         <p class=error>${errorPassword}</p>
 
                         <br>
-                        <div style="display: flex; justify-content: center"><input type="submit"
-                                                                                   value="<spring:message code="login.signup"/>"/>
+                        <div style="display: flex; justify-content: center"><input type="submit" value="<spring:message code="login.signup"/>"/>
                         </div>
 
                     </form:form>

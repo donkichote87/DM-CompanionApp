@@ -18,6 +18,7 @@ public class User {
     @Column(nullable = false, unique = true, length = 60)
     @NotNull
     @NotBlank
+    @Size(min = 4)
     private String username;
     @Column(nullable = false, unique = true, length = 60)
     @NotNull

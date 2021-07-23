@@ -22,7 +22,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
 </head>
 <body>
 <header>
@@ -30,7 +30,7 @@
 
         <div class="container-fluid">
             <a href="/" class="navbar-brand">
-                <img src="images/kostki.png" style="width:60px;">
+                <img src="/images/kostki.png" style="width:60px;">
                 DM <span>Companion App</span>
             </a>
 
@@ -45,9 +45,18 @@
                                     code="login.register"/></a>
                             <a class="dropdown-item" href="#">
                                 </sec:authorize>
-                                <sec:authorize access="isAuthenticated()">
+                                    <sec:authorize access="isAuthenticated()">
+                                    <a class="dropdown-item" href="/login"><spring:message code="navbar.dashboard"/></a>
+                                        </sec:authorize>
+                                            <sec:authorize access="isAuthenticated()">
+                                            <a class="dropdown-item" href="/user/edit"><spring:message code="navbar.edit"/></a>
+                                                </sec:authorize>
+                                    <sec:authorize access="isAuthenticated()">
+                                    <div class="dropdown-divider"></div>
+                                    </sec:authorize>
+                                                <sec:authorize access="isAuthenticated()">
                                     <form class="dropdown-item" action="<c:url value="/logout"/>" method="post">
-                                        <input class="link-button" type="submit" value="Wyloguj">
+                                        <input class="link-button justify-content-start" type="submit" value="Wyloguj">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     </form>
                                 </sec:authorize></a>

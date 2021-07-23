@@ -1,14 +1,13 @@
 package pl.basicstuff.dmcompanionapp.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.basicstuff.dmcompanionapp.user.CurrentUser;
 import pl.basicstuff.dmcompanionapp.user.User;
@@ -28,14 +27,14 @@ public class LoginController {
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("user", new User());
-        return "admin/login";
+        return "login/login";
     }
 
 
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
-        return "admin/login";
+        return "login/login";
     }
 
     @PostMapping("/register")
@@ -43,7 +42,7 @@ public class LoginController {
         User validateEmail = userService.findByEmail(user.getEmail());
         if (validateEmail != null) {
             request.setAttribute("userEmailExist", "Użytkownik o podanym adresie email już istnieje");
-            return "admin/login";
+            return "login/login";
         }
 
         User validateLogin = userService.findByUserName(user.getUsername());
@@ -51,16 +50,16 @@ public class LoginController {
         String password = request.getParameter("passwordConfirm");
         if (validateLogin != null) {
             request.setAttribute("userLoginExist", "Podany login jest już zajęty");
-            return "admin/login";
+            return "login/login";
         }
         if (result.hasErrors() && !password.equals(user.getPassword())) {
             request.setAttribute("errorPassword", "Podane hasła nie są identyczne");
-            return "admin/login";
+            return "login/login";
         } else if (result.hasErrors()) {
-            return "admin/login";
+            return "login/login";
         } else if (!password.equals(user.getPassword())) {
             request.setAttribute("errorPassword", "Podane hasła nie są identyczne");
-            return "admin/login";
+            return "login/login";
         }
 
         userService.saveUser(user, getSiteURL(request));
@@ -89,5 +88,11 @@ public class LoginController {
             attributes.addFlashAttribute("verifyFail", "Nie mogliśmy zweryfikować Twojego konta. Możliwe że zostało już zweryfikowane lub kod weryfikacyjny jest nieprawidłowy.");
             return "redirect:/register";
         }
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        dataBinder.registerCustomEditor(String.class,stringTrimmerEditor);
     }
 }
