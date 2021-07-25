@@ -98,7 +98,7 @@
                         </li>
                     </sec:authorize>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><spring:message code="navbar.diceRoll"/></a>
+                        <a class="nav-link" href="/dice"><spring:message code="navbar.diceRoll"/></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/about"><spring:message code="navbar.about"/></a>
