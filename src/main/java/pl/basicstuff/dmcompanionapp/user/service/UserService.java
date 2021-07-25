@@ -96,8 +96,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void updateName(User user) {
-        user.setUsername(user.getUsername());
+    public void updateEmail(User user) {
+        ;
         userRepository.save(user);
     }
 

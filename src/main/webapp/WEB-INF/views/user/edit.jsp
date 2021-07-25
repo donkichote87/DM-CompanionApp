@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: xyz
@@ -7,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/views/app/header.jsp" %>
+<c:set var="url" value="${requestScope['javax.servlet.forward.request_uri']}" />
 <c:if test="${not empty editSuccess}">
     <div class="alert alert-dismissible alert-success">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -16,7 +18,6 @@
 <div class="container">
     <br><br>
 
-
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne" >
@@ -24,9 +25,9 @@
                     <spring:message code="user.passwordChange"/>
                 </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+            <div id="collapseOne" class="accordion-collapse collapse <c:if test="${fn:contains(url, 'pass')}">show</c:if>" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
                 <div class="accordion-body">
-                    <form:form method="post" modelAttribute="userDto">
+                    <form:form method="post" action="/user/edit/pass" modelAttribute="userDtoPass">
                         <div style="display: flex; justify-content: center">
                             <label><spring:message code="user.passwordNew"/>: <br>
                                 <form:password path="password"/> </label></div>
@@ -45,12 +46,34 @@
             </div>
         </div>
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed bg-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <h2 class="accordion-header" id="headingTwo" >
+                <button class="accordion-button collapsed bg-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <spring:message code="user.emailChange"/>
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse <c:if test="${fn:contains(url, 'email')}">show</c:if>" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                <div class="accordion-body">
+                    <form:form method="post" action="/user/edit/email" modelAttribute="userDtoMail">
+                        <div style="display: flex; justify-content: center">
+                            <label><spring:message code="user.emailNew"/>: <br>
+                                <form:input path="email"/> </label></div>
+                        <form:errors path="email" cssClass="error"/>
+
+                        <br>
+                        <div style="display: flex; justify-content: center">
+                            <input type="submit" value="<spring:message code="user.emailSave"/>"/>
+                        </div>
+                    </form:form>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed bg-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                     <spring:message code="user.delete"/>
                 </button>
             </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
                 <div class="accordion-body">
                     <div style="display: flex; justify-content: center"><spring:message code="delete.message"/></div>
                     <br>

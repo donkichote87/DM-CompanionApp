@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
@@ -77,7 +78,7 @@
                     <sec:authorize access="isAuthenticated()">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                               aria-haspopup="true" aria-expanded="false">Gracz</a>
+                               aria-haspopup="true" aria-expanded="false"><spring:message code="navbar.player"/></a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#"><spring:message code="navbar.new"/></a>
                                 <div class="dropdown-divider"></div>
@@ -100,7 +101,7 @@
                         <a class="nav-link" href="#"><spring:message code="navbar.diceRoll"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><spring:message code="navbar.about"/></a>
+                        <a class="nav-link" href="/about"><spring:message code="navbar.about"/></a>
                     </li>
                 </ul>
 
