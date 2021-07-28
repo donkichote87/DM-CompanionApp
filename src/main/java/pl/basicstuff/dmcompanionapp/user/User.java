@@ -20,7 +20,7 @@ public class User {
     @NotBlank
     @Size(min = 4)
     private String username;
-    @Column(nullable = false, unique = true, length = 60)
+    @Column(nullable = false, unique = true)
     @NotNull
     @NotEmpty
     @Email

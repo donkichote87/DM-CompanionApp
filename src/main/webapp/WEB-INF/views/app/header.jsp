@@ -68,10 +68,10 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                                aria-haspopup="true" aria-expanded="false"><spring:message code="navbar.npc"/></a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><spring:message code="navbar.new"/></a>
+                                <a class="dropdown-item" href="/npc/create"><spring:message code="navbar.new"/></a>
                                 <a class="dropdown-item" href="#"><spring:message code="navbar.random"/></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><spring:message code="navbar.list"/></a>
+                                <a class="dropdown-item" href="/npc/list"><spring:message code="navbar.list"/></a>
                             </div>
                         </li>
                     </sec:authorize>

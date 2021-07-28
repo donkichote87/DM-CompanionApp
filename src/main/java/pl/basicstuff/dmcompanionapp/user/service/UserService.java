@@ -97,7 +97,7 @@ public class UserService {
     }
 
     public void updateEmail(User user) {
-        ;
+
         userRepository.save(user);
     }
 
