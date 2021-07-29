@@ -71,8 +71,14 @@ public class UserController {
     }
     @PostMapping("/edit/email")
     public String emailSave(@Valid UserDtoMail userDtoMail, BindingResult result, RedirectAttributes attributes, Model model, HttpServletRequest request, @AuthenticationPrincipal CurrentUser customUser) {
-        String password = request.getParameter("passwordConfirm");
         User entityUser = customUser.getUser();
+        User validateEmail = userService.findByEmail(userDtoMail.getEmail());
+        if (validateEmail != null) {
+            request.setAttribute("alreadyExist", "Użytkownik o podanym adresie email już istnieje");
+            model.addAttribute("userDtoPass", new UserDtoPass());
+            return "user/edit";
+        }
+
         if (result.hasErrors()) {
             model.addAttribute("userDtoPass", new UserDtoPass());
             return "user/edit";

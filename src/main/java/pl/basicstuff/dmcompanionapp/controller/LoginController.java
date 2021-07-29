@@ -41,7 +41,7 @@ public class LoginController {
     public String add(@Valid User user, BindingResult result, RedirectAttributes attributes, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
         User validateEmail = userService.findByEmail(user.getEmail());
         if (validateEmail != null) {
-            request.setAttribute("userEmailExist", "Użytkownik o podanym adresie email już istnieje");
+            request.setAttribute("alreadyExist", "Użytkownik o podanym adresie email już istnieje");
             return "login/login";
         }
 
@@ -49,7 +49,7 @@ public class LoginController {
 
         String password = request.getParameter("passwordConfirm");
         if (validateLogin != null) {
-            request.setAttribute("userLoginExist", "Podany login jest już zajęty");
+            request.setAttribute("alreadyExist", "Podany login jest już zajęty");
             return "login/login";
         }
         if (result.hasErrors() && !password.equals(user.getPassword())) {
@@ -92,7 +92,7 @@ public class LoginController {
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
-        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(false);
         dataBinder.registerCustomEditor(String.class,stringTrimmerEditor);
     }
 }

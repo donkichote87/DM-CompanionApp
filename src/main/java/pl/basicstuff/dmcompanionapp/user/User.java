@@ -16,23 +16,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true, length = 60)
-    @NotNull
     @NotBlank
     @Size(min = 4)
+    @Pattern(regexp = "[^\\s-]", message = "{username.space}")
     private String username;
     @Column(nullable = false, unique = true)
-    @NotNull
-    @NotEmpty
+    @NotBlank
     @Email
     private String email;
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", message = "{password.notValid}")
-    @NotNull
-    @NotBlank
     private String password;
     private boolean enabled;
     @Column(name = "verification_code", length = 64)
     private String verificationCode;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 
 }

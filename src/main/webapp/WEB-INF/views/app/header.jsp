@@ -86,17 +86,7 @@
                             </div>
                         </li>
                     </sec:authorize>
-                    <sec:authorize access="isAuthenticated()">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                               aria-haspopup="true" aria-expanded="false"><spring:message code="navbar.event"/></a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><spring:message code="navbar.random"/></a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><spring:message code="navbar.list"/></a>
-                            </div>
-                        </li>
-                    </sec:authorize>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/dice"><spring:message code="navbar.diceRoll"/></a>
                     </li>

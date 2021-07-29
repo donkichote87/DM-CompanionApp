@@ -9,16 +9,12 @@
 <%@include file="/WEB-INF/views/app/header.jsp" %>
 <br><br>
 <div class="container">
-    <c:if test="${not empty Success}">
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>${Success}</strong>
-        </div>
-    </c:if>
     <div class="card text-white bg-secondary mb-3">
         <div class="card-header"><spring:message code="char.npc"/></div>
         <div class="card-body">
             <form:form method="post" modelAttribute="npc">
+                <form:hidden path="id"/>
+                <form:hidden path="user"/>
                 <div class="row">
                     <div class="col-sm">
                         <div style="display: flex; justify-content: start">

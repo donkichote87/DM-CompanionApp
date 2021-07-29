@@ -13,18 +13,6 @@
         <strong>${verify}</strong>
     </div>
 </c:if>
-<c:if test="${not empty userEmailExist}">
-    <div class="alert alert-dismissible alert-danger">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>${userEmailExist}</strong>
-    </div>
-</c:if>
-<c:if test="${not empty userLoginExist}">
-    <div class="alert alert-dismissible alert-danger">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>${userLoginExist}</strong>
-    </div>
-</c:if>
 <c:if test="${not empty verifySuccess}">
     <div class="alert alert-dismissible alert-success">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -68,6 +56,12 @@
             <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
                 <div class="card-header"><spring:message code="login.register"/></div>
                 <div class="card-body">
+                    <c:if test="${not empty alreadyExist}">
+                        <div class="alert alert-dismissible alert-danger">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <strong>${alreadyExist}</strong>
+                        </div>
+                    </c:if>
                     <form:form method="post" action="register" modelAttribute="user">
                         <div style="display: flex; justify-content: center"><label><spring:message code="user.name"/>:
                             <br><form:input path="username"/>

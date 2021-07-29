@@ -15,6 +15,12 @@
         <strong>${editSuccess}</strong>
     </div>
 </c:if>
+<c:if test="${not empty alreadyExist}">
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>${alreadyExist}</strong>
+    </div>
+</c:if>
 <div class="container">
     <br><br>
 

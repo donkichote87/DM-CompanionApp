@@ -9,6 +9,12 @@
 <%@include file="/WEB-INF/views/app/header.jsp" %>
 <br><br>
 <div class="container">
+    <c:if test="${not empty Success}">
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>${Success}</strong>
+        </div>
+    </c:if>
     <div class="card text-white bg-secondary mb-3">
         <div class="card-header"><spring:message code="char.listNpc"/></div>
         <div class="card-body">
@@ -26,7 +32,7 @@
                     <th scope="col"><spring:message code="char.sex"/></th>
                     <th scope="col"><spring:message code="char.race"/></th>
                     <th scope="col"><spring:message code="char.occupation"/></th>
-                    <th></th>
+                    <th><a href="/npc/create" class="btn btn-danger btn-sm"><spring:message code="char.add"/></a></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,7 +47,7 @@
                         <td>
                             <a href="/npc/view/${npc.id}" class="btn btn-success btn-sm"><spring:message code="list.view"/></a>
                             <a href="/npc/edit/${npc.id}" class="btn btn-info btn-sm"><spring:message code="list.edit"/></a>
-                            <a href="/npc/delete/${npc.id}" class="btn btn-warning btn-sm"><spring:message code="list.delete"/></a>
+                            <a href="/npc/confirm/${npc.id}" class="btn btn-warning btn-sm"><spring:message code="list.delete"/></a>
                         </td>
                     </tr>
                 </c:forEach>
