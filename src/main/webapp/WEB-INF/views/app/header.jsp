@@ -24,6 +24,8 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <header>
