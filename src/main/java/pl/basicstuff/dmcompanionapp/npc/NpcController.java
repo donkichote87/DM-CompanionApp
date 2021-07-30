@@ -50,14 +50,12 @@ public class NpcController {
 
     @GetMapping("/edit/{id}")
     public String npcEditForm(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        Npc npc = npcService.findNpcById(id);
         Long currentUser = customUser.getUser().getId();
-        Long npcUser = npc.getUser().getId();
+        Long npcUser = getNpc(id).getUser().getId();
         if (currentUser != npcUser) {
             return "403";
         }
-        model.addAttribute("npc", npc);
-        System.out.println(npcService.findNpcById(id).getUser());
+        model.addAttribute("npc", getNpc(id));
         return "npc/npc-form";
     }
 
@@ -73,9 +71,8 @@ public class NpcController {
     }
     @RequestMapping("/confirm/{id}")
     public String confirm(@PathVariable long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        Npc npc = npcService.findNpcById(id);
         Long currentUser = customUser.getUser().getId();
-        Long npcUser = npc.getUser().getId();
+        Long npcUser = getNpc(id).getUser().getId();
         if (currentUser != npcUser) {
             return "403";
         }
@@ -84,16 +81,30 @@ public class NpcController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteBook(@PathVariable long id, RedirectAttributes attributes, @AuthenticationPrincipal CurrentUser customUser) {
-        Npc npc = npcService.findNpcById(id);
+    public String deleteBook(@PathVariable Long id, RedirectAttributes attributes, @AuthenticationPrincipal CurrentUser customUser) {
         Long currentUser = customUser.getUser().getId();
-        Long npcUser = npc.getUser().getId();
+        Long npcUser = getNpc(id).getUser().getId();
         if (currentUser != npcUser) {
             return "403";
         }
 
-        npcService.deleteNpc(npc);
+        npcService.deleteNpc(getNpc(id));
         attributes.addFlashAttribute("Success", "Bohater niezależny został usunięty");
         return "redirect:/npc/list";
+    }
+
+    @GetMapping("/view/{id}")
+    public String npcReadForm(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
+        Long currentUser = customUser.getUser().getId();
+        Long npcUser = getNpc(id).getUser().getId();
+        if (currentUser != npcUser) {
+            return "403";
+        }
+        model.addAttribute("npc", getNpc(id));
+        return "npc/npc-form";
+    }
+
+    public Npc getNpc(Long id) {
+        return npcService.findNpcById(id);
     }
 }
