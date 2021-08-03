@@ -3232,31 +3232,31 @@ textarea.form-control-lg {
 
 .btn-info {
     color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8
+    background-color: #5C4033;
+    border-color: #5C4033
 }
 
 .btn-info:hover {
     color: #fff;
-    background-color: #148a9c;
-    border-color: #128293
+    background-color: #6F4E37;
+    border-color: #6F4E37
 }
 
 .btn-check:focus + .btn-info, .btn-info:focus {
     color: #fff;
-    background-color: #148a9c;
-    border-color: #128293;
+    background-color: #5C4033;
+    border-color: #6F4E37;
     box-shadow: 0 0 0 .25rem rgba(58, 176, 195, .5)
 }
 
 .btn-check:active + .btn-info, .btn-check:checked + .btn-info, .btn-info.active, .btn-info:active, .show > .btn-info.dropdown-toggle {
     color: #fff;
-    background-color: #128293;
-    border-color: #117a8a
+    background-color: #5C4033;
+    border-color: #6F4E37
 }
 
 .btn-check:active + .btn-info:focus, .btn-check:checked + .btn-info:focus, .btn-info.active:focus, .btn-info:active:focus, .show > .btn-info.dropdown-toggle:focus {
-    box-shadow: 0 0 0 .25rem rgba(58, 176, 195, .5)
+    box-shadow: 0 0 0 .25rem #6F4E37
 }
 
 .btn-info.disabled, .btn-info:disabled {
@@ -8134,7 +8134,7 @@ textarea.form-control-lg {
 }
 
 .bg-info {
-    background-color: #17a2b8 !important
+    background-color: #5C4033 !important
 }
 
 .bg-warning {
@@ -11844,7 +11844,7 @@ textarea.form-control-lg {
 }
 
 button, input, optgroup, select, textarea {
-    font-family: Neucha, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+    font-family: "Caveat Brush", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
 }
 
 blockquote {

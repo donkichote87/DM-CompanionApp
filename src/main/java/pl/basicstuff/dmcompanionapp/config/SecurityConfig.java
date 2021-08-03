@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/npc/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/player/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/login", "/register").not().hasAnyRole("USER", "ADMIN")
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error="+ RandomString.make(5))
                 .and().logout().logoutSuccessUrl("/")

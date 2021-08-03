@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 @Controller
-@RequestMapping("dice")
+@RequestMapping("/dice")
 public class DiceRollController {
 
     @GetMapping
@@ -36,7 +36,6 @@ public class DiceRollController {
                 k4.add(random.nextInt((4 - 1) + 1) + 1);
             }
             model.addAttribute("k4", k4);
-            System.out.println(k4);
         }
 
         if (diceRoll.getK6() != 0) {

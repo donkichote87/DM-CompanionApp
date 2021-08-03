@@ -32,7 +32,7 @@
                     <th scope="col"><spring:message code="char.sex"/></th>
                     <th scope="col"><spring:message code="char.race"/></th>
                     <th scope="col"><spring:message code="char.occupation"/></th>
-                    <th><a href="/npc/create" class="btn btn-danger btn-sm"><spring:message code="char.add"/></a></th>
+                    <th><a href="/npc/create" class="btn btn-info btn-sm"><spring:message code="char.add"/></a></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,9 +45,9 @@
                         <td>${npc.race}</td>
                         <td>${npc.occupation}</td>
                         <td>
-                            <a href="/npc/view/${npc.id}" class="btn btn-success btn-sm"><spring:message code="list.view"/></a>
+                            <a href="/npc/view/${npc.id}" class="btn btn-info btn-sm"><spring:message code="list.view"/></a>
                             <a href="/npc/edit/${npc.id}" class="btn btn-info btn-sm"><spring:message code="list.edit"/></a>
-                            <a href="/npc/confirm/${npc.id}" class="btn btn-warning btn-sm"><spring:message code="list.delete"/></a>
+                            <a href="/npc/confirm/${npc.id}" class="btn btn-info btn-sm"><spring:message code="list.delete"/></a>
                         </td>
                     </tr>
                 </c:forEach>

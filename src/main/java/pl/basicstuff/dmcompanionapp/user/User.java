@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false, unique = true, length = 60)
     @NotBlank
     @Size(min = 4)
-    @Pattern(regexp = "[^\\s-]", message = "{username.space}")
+    @Pattern(regexp = "^\\S*$", message = "{username.space}")
     private String username;
     @Column(nullable = false, unique = true)
     @NotBlank

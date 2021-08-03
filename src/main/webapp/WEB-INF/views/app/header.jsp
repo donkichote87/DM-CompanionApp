@@ -38,6 +38,16 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav ms-auto">
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false"><spring:message code="navbar.admin"/></a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/admin/dashboard"><spring:message code="navbar.adminDashboard"/></a>
+                                <a class="dropdown-item" href="/admin/data"><spring:message code="navbar.adminData"/></a>
+                            </div>
+                        </li>
+                    </sec:authorize>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                            aria-haspopup="true" aria-expanded="false"><spring:message code="navbar.profile"/></a>
@@ -48,7 +58,7 @@
                             <a class="dropdown-item" href="#">
                                 </sec:authorize>
                                     <sec:authorize access="isAuthenticated()">
-                                    <a class="dropdown-item" href="/login"><spring:message code="navbar.dashboard"/></a>
+                                    <a class="dropdown-item" href="/user/dashboard"><spring:message code="navbar.dashboard"/></a>
                                         </sec:authorize>
                                             <sec:authorize access="isAuthenticated()">
                                             <a class="dropdown-item" href="/user/edit"><spring:message code="navbar.edit"/></a>

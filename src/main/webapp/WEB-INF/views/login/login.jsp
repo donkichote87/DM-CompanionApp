@@ -43,8 +43,7 @@
                             <p class=error><spring:message code="login.error"/></p>
                         </c:if>
                         <br>
-                        <div style="display: flex; justify-content: center"><input type="submit"
-                                                                                   value="<spring:message code="login.signIn"/>"/>
+                        <div style="display: flex; justify-content: center"><input type="submit" class="btn-info" value="<spring:message code="login.signIn"/>"/>
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
@@ -81,7 +80,7 @@
                         <p class=error>${errorPassword}</p>
 
                         <br>
-                        <div style="display: flex; justify-content: center"><input type="submit" value="<spring:message code="login.signup"/>"/>
+                        <div style="display: flex; justify-content: center"><input type="submit" class="btn-info"  value="<spring:message code="login.signup"/>"/>
                         </div>
 
                     </form:form>

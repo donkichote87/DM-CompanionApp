@@ -9,21 +9,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.basicstuff.dmcompanionapp.npc.Npc;
+import pl.basicstuff.dmcompanionapp.npc.NpcService;
 import pl.basicstuff.dmcompanionapp.user.dto.UserDtoMail;
 import pl.basicstuff.dmcompanionapp.user.dto.UserDtoPass;
 import pl.basicstuff.dmcompanionapp.user.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final NpcService npcService;
 
     @GetMapping("/dashboard")
-    public String dashboard() {
+    public String dashboard(Model model, @AuthenticationPrincipal CurrentUser customUser) {
+        List<Npc> npcs = npcService.findNpcsByUserId(customUser.getUser().getId());
+        model.addAttribute("username", customUser.getUser().getUsername());
+        model.addAttribute("npcCount", npcs.size());
+        if (npcs.size()>0) {
+            model.addAttribute("lastNpc", npcs.get(0));
+        }
         return "user/dashboard";
     }
 

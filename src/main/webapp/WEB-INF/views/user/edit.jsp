@@ -45,7 +45,7 @@
                         <p class=error>${errorPassword}</p>
                         <br>
                         <div style="display: flex; justify-content: center">
-                            <input type="submit" value="<spring:message code="user.passwordSave"/>"/>
+                            <input type="submit" class="btn-info" value="<spring:message code="user.passwordSave"/>"/>
                         </div>
                     </form:form>
                 </div>
@@ -67,7 +67,7 @@
 
                         <br>
                         <div style="display: flex; justify-content: center">
-                            <input type="submit" value="<spring:message code="user.emailSave"/>"/>
+                            <input type="submit" class="btn-info" value="<spring:message code="user.emailSave"/>"/>
                         </div>
                     </form:form>
                 </div>

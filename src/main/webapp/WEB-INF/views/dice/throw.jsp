@@ -22,7 +22,7 @@
                 <div><label><spring:message code="dice.k12"/><br><form:select path="k12"><form:options items="${range}"/></form:select></label></div>
                 <div><label><spring:message code="dice.k20"/><br><form:select path="k20"><form:options items="${range}"/></form:select></label></div>
                 <br>
-                <input type="submit" value="<spring:message code="dice.throw"/>">
+                <input type="submit" class="btn-info" value="<spring:message code="dice.throw"/>">
             </form:form>
         </div>
     </div>

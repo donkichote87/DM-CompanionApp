@@ -69,6 +69,7 @@ public class NpcController {
         attributes.addFlashAttribute("Success", "Bohater niezależny został zapisany");
         return "redirect:/npc/list";
     }
+
     @RequestMapping("/confirm/{id}")
     public String confirm(@PathVariable long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
         Long currentUser = customUser.getUser().getId();
@@ -100,11 +101,29 @@ public class NpcController {
         if (currentUser != npcUser) {
             return "403";
         }
-        model.addAttribute("npc", getNpc(id));
-        return "npc/npc-form";
+
+
+        model.addAttribute("npc", npcStringToHtml(getNpc(id)));
+        return "npc/npc-view";
     }
 
     public Npc getNpc(Long id) {
         return npcService.findNpcById(id);
+    }
+
+
+    public Npc npcStringToHtml(Npc npc) {
+        npc.setHistory(npc.getHistory().replaceAll("(\r\n|\n)", "<br>"));
+        npc.setAbilities(npc.getAbilities().replaceAll("(\r\n|\n)", "<br />"));
+        npc.setAppearance(npc.getAppearance().replaceAll("(\r\n|\n)", "<br />"));
+        npc.setBond(npc.getBond().replaceAll("(\r\n|\n)", "<br />"));
+        npc.setFlawOrSecret(npc.getFlawOrSecret().replaceAll("(\r\n|\n)", "<br />"));
+        npc.setIdeal(npc.getIdeal().replaceAll("(\r\n|\n)", "<br />"));
+        npc.setInteraction(npc.getInteraction().replaceAll("(\r\n|\n)", "<br />"));
+        npc.setMannerism(npc.getMannerism().replaceAll("(\r\n|\n)", "<br />"));
+        npc.setTalent(npc.getTalent().replaceAll("(\r\n|\n)", "<br />"));
+        npc.setUsefulKnowledge(npc.getUsefulKnowledge().replaceAll("(\r\n|\n)", "<br />"));
+
+        return npc;
     }
 }

@@ -14,6 +14,7 @@ import pl.basicstuff.dmcompanionapp.user.UserRepository;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -103,5 +104,59 @@ public class UserService {
 
     public void deleteUser(User user) {
         userRepository.delete(user);
+    }
+
+    public List<User> findAllByEnabledTrue() {
+        return userRepository.findAllByEnabledTrueOrderByIdDesc();
+    }
+
+    public List<User> findAllByRoleId(int id) {
+        return userRepository.findAllByRoleId(id);
+    }
+
+    public void changeRoleToAdmin(User user) {
+        Role userRole = roleRepository.findByName("ROLE_ADMIN");
+        user.setRole(userRole);
+        userRepository.save(user);
+    }
+    public void changeRoleToUser(User user) {
+        Role userRole = roleRepository.findByName("ROLE_USER");
+        user.setRole(userRole);
+        userRepository.save(user);
+    }
+
+    public void blockUser(User user, String siteUrl)
+            throws MessagingException, UnsupportedEncodingException {
+        user.setEnabled(false);
+        sendBanNotification(user, siteUrl);
+        userRepository.save(user);
+    }
+
+
+    private void sendBanNotification(User user, String siteURL)
+            throws MessagingException, UnsupportedEncodingException {
+        String toAddress = user.getEmail();
+        String fromAddress = "dungeonmaster.companion.app@gmail.com";
+        String senderName = "DM-Companion App";
+        String subject = "Twoje konto zostało zablokowane";
+        String content = "Hej [[name]],<br>"
+                + "Informujemy że Twoje konto zostało zablokowane przez Administratora.<br>"
+                + "Jeśli chcesz je odblokować, proszę skontaktuj się z nami w celu wyjaśnienia sytuacji.<br>"
+                + "Pozdrawiamy!<br>"
+                + "DM-Companion App.";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(toAddress);
+        helper.setSubject(subject);
+
+        content = content.replace("[[name]]", user.getUsername());
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
+
     }
 }
