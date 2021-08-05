@@ -21,6 +21,8 @@ Wykorzystane technologie:
 
 Projekt jest wciąż rozwijany. W przypadku sugesti zachęcam do kontaktu.
 
+_________________________________________________________________________________
+
 DM-CompanionApp is being created as a final project for Junior Java Developer cours in CodersLab.
 Idea for it came from trying to combine coding and passion for "paper" RPGs such as Dungeons and Dragons.
 
