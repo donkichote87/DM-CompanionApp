@@ -2,6 +2,7 @@ package pl.basicstuff.dmcompanionapp.admin;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.basicstuff.dmcompanionapp.npc.NpcService;
+import pl.basicstuff.dmcompanionapp.user.CurrentUser;
 import pl.basicstuff.dmcompanionapp.user.User;
 import pl.basicstuff.dmcompanionapp.user.service.UserService;
 
@@ -25,10 +27,12 @@ public class AdminController {
     private final NpcService npcService;
 
     @GetMapping("/dashboard")
-    public String dashboard(Model model) {
+    public String dashboard(Model model, @AuthenticationPrincipal CurrentUser customUser) {
+        User entityUser = customUser.getUser();
         List<User> users = userService.findAllByEnabledTrue();
         model.addAttribute("users", users);
         model.addAttribute("npcService", npcService);
+        model.addAttribute("curentUser", entityUser);
         return "admin/dashboard";
     }
 

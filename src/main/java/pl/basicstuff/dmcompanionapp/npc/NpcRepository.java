@@ -2,7 +2,6 @@ package pl.basicstuff.dmcompanionapp.npc;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.basicstuff.dmcompanionapp.user.User;
 
 import javax.transaction.Transactional;
 import java.util.List;

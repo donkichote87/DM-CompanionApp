@@ -67,12 +67,6 @@ public class LoginController {
         return "redirect:/register";
     }
 
-    @GetMapping("/admin")
-    @ResponseBody
-    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
-        User entityUser = customUser.getUser();
-        return "Hello " + entityUser.getUsername();
-    }
 
     private String getSiteURL(HttpServletRequest request) {
         String siteURL = request.getRequestURL().toString();

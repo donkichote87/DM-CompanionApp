@@ -68,8 +68,10 @@
                             <td>
                                 <a href="/admin/role/${user.id}" class="btn btn-info btn-sm"><spring:message
                                         code="admin.roleChange"/></a>
+                                <c:if test="${user.id != curentUser.id}">
                                 <a href="/admin/confirm/${user.id}" class="btn btn-info btn-sm"><spring:message
                                         code="admin.blockUser"/></a>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>
@@ -79,4 +81,5 @@
         </div>
     </div>
 </div>
+<br><br>
 <%@include file="/WEB-INF/views/app/footer.jsp" %>
