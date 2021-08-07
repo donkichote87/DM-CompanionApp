@@ -34,9 +34,9 @@
                                 <spring:message code="char.sex"/>:
                                 <br>
                                 <form:select path="sex">
-                                    <form:option value="-" label="Wybierz"/>
-                                    <form:option value="M" label="Mężczyzna"/>
-                                    <form:option value="F" label="Kobieta"/>
+                                    <form:option value="-"><spring:message code="form.chooseOne"/></form:option>
+                                    <form:option value="M"><spring:message code="char.male"/></form:option>
+                                    <form:option value="F"><spring:message code="char.female"/></form:option>
                                 </form:select>
                                 <br>
                                 <form:errors path="sex" cssClass="error"/>
@@ -131,7 +131,7 @@
                 <br>
                     <c:if test="${(fn:contains(url, 'random'))}">
                         <div class="row">
-                        <div><a href="/npc/list" class="btn btn-lg btn-info" style="width: 100%"><spring:message
+                        <div><a href="/npc/random" class="btn btn-lg btn-info" style="width: 100%"><spring:message
                                 code="char.random"/></a></div>
                         </div>
                         <br>

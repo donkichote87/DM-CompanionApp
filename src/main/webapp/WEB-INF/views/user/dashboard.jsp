@@ -32,7 +32,7 @@
             </div>
             <div class="card text-white bg-secondary mb-3">
                 <div class="card-body">
-                    <h4><spring:message code="dashboard.playerCount"/>: </h4>
+                    <h4><spring:message code="dashboard.playerCount"/>: ${playerCount}</h4>
                 </div>
             </div>
         </div>
@@ -84,6 +84,40 @@
         <div class="card text-white bg-secondary mb-3">
             <div class="card-header"><spring:message code="dashboard.lastPlayer"/></div>
             <div class="card-body">
+                <table class="table table-hover" style="width: 100%">
+                    <colgroup>
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th scope="col"><spring:message code="char.name"/></th>
+                        <th scope="col"><spring:message code="char.sex"/></th>
+                        <th scope="col"><spring:message code="char.race"/></th>
+                        <th scope="col"><spring:message code="player.class"/></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:if test="${not empty lastPlayer}">
+                        <tr>
+                            <th scope="row">${lastPlayer.name}</th>
+                            <td><c:choose><c:when test="${fn:contains(lastPlayer.sex, 'M')}"><spring:message
+                                    code="char.male"/></c:when><c:otherwise><spring:message
+                                    code="char.female"/></c:otherwise></c:choose></td>
+                            <td>${lastPlayer.race.subRace}</td>
+                            <td>${lastPlayer.characterClass.name}</td>
+                            <td>
+                                <a href="/player/view/${lastPlayer.id}" class="btn btn-info btn-sm"><spring:message
+                                        code="list.view"/></a>
+                            </td>
+                        </tr>
+                    </c:if>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

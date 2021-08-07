@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.basicstuff.dmcompanionapp.npc.NpcService;
+import pl.basicstuff.dmcompanionapp.player.PlayerService;
 import pl.basicstuff.dmcompanionapp.user.CurrentUser;
 import pl.basicstuff.dmcompanionapp.user.User;
 import pl.basicstuff.dmcompanionapp.user.service.UserService;
@@ -17,6 +18,7 @@ import pl.basicstuff.dmcompanionapp.user.service.UserService;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -25,14 +27,17 @@ import java.util.List;
 public class AdminController {
     private final UserService userService;
     private final NpcService npcService;
+    private final PlayerService playerService;
 
     @GetMapping("/dashboard")
-    public String dashboard(Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        User entityUser = customUser.getUser();
+    public String dashboard(Model model, Principal principal) {
+        String currentUserName = principal.getName();
         List<User> users = userService.findAllByEnabledTrue();
+
         model.addAttribute("users", users);
         model.addAttribute("npcService", npcService);
-        model.addAttribute("curentUser", entityUser);
+        model.addAttribute("playerService", playerService);
+        model.addAttribute("currentUser", currentUserName);
         return "admin/dashboard";
     }
 
@@ -96,6 +101,11 @@ public class AdminController {
     private String getSiteURL(HttpServletRequest request) {
         String siteURL = request.getRequestURL().toString();
         return siteURL.replace(request.getServletPath(), "");
+
+
+    }
+    public Long userId(Principal principal) {
+        return userService.findByUserName(principal.getName()).getId();
     }
 
 }

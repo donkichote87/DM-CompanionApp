@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.basicstuff.dmcompanionapp.user.CurrentUser;
 import pl.basicstuff.dmcompanionapp.user.User;
+import pl.basicstuff.dmcompanionapp.user.service.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -21,6 +23,7 @@ import java.util.List;
 @RequestMapping("/npc")
 public class NpcController {
     private final NpcService npcService;
+    private final UserService userService;
 
     @GetMapping("/create")
     public String npcCreateForm(Model model) {
@@ -30,8 +33,8 @@ public class NpcController {
 
     @PostMapping("/create")
 
-    public String npcSave(@Valid Npc npc, BindingResult result, @AuthenticationPrincipal CurrentUser customUser, RedirectAttributes attributes) {
-        User entityUser = customUser.getUser();
+    public String npcSave(@Valid Npc npc, BindingResult result, Principal principal, RedirectAttributes attributes) {
+        User entityUser = userService.findById(userId(principal));
         if (result.hasErrors()) {
             return "npc/npc-form";
         }
@@ -49,8 +52,8 @@ public class NpcController {
     }
 
     @GetMapping("/edit/{id}")
-    public String npcEditForm(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        Long currentUser = customUser.getUser().getId();
+    public String npcEditForm(@PathVariable Long id, Model model, Principal principal) {
+        Long currentUser = userId(principal);
         Long npcUser = getNpc(id).getUser().getId();
         if (currentUser != npcUser) {
             return "403";
@@ -60,19 +63,19 @@ public class NpcController {
     }
 
     @PostMapping("/edit/{id}")
-    public String npcEditSave(@Valid Npc npc, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal CurrentUser customUser) {
-        User entityUser = customUser.getUser();
+    public String npcEditSave(@Valid Npc npc, BindingResult result, RedirectAttributes attributes) {
+
         if (result.hasErrors()) {
             return "npc/npc-form";
         }
         npcService.updateNpc(npc);
-        attributes.addFlashAttribute("Success", "Bohater niezależny został zapisany");
+        attributes.addFlashAttribute("Success", "Bohater niezależny został nadpisany");
         return "redirect:/npc/list";
     }
 
     @RequestMapping("/confirm/{id}")
-    public String confirm(@PathVariable long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        Long currentUser = customUser.getUser().getId();
+    public String confirm(@PathVariable long id, Model model, Principal principal) {
+        Long currentUser = userId(principal);
         Long npcUser = getNpc(id).getUser().getId();
         if (currentUser != npcUser) {
             return "403";
@@ -82,8 +85,8 @@ public class NpcController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteBook(@PathVariable Long id, RedirectAttributes attributes, @AuthenticationPrincipal CurrentUser customUser) {
-        Long currentUser = customUser.getUser().getId();
+    public String deleteNpc(@PathVariable Long id, RedirectAttributes attributes, Principal principal) {
+        Long currentUser = userId(principal);
         Long npcUser = getNpc(id).getUser().getId();
         if (currentUser != npcUser) {
             return "403";
@@ -95,8 +98,8 @@ public class NpcController {
     }
 
     @GetMapping("/view/{id}")
-    public String npcReadForm(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser customUser) {
-        Long currentUser = customUser.getUser().getId();
+    public String npcReadForm(@PathVariable Long id, Model model, Principal principal) {
+        Long currentUser = userId(principal);
         Long npcUser = getNpc(id).getUser().getId();
         if (currentUser != npcUser) {
             return "403";
@@ -106,6 +109,27 @@ public class NpcController {
         model.addAttribute("npc", npcStringToHtml(getNpc(id)));
         return "npc/npc-view";
     }
+
+    @GetMapping("/random")
+    public String npcRandomForm(Model model) {
+        model.addAttribute("npc", new Npc());
+        return "npc/npc-form";
+    }
+
+    @PostMapping("/random")
+
+    public String npcRandom(@Valid Npc npc, BindingResult result, Principal principal, RedirectAttributes attributes) {
+        User entityUser = userService.findById(userId(principal));
+        if (result.hasErrors()) {
+            return "npc/npc-form";
+        }
+        npc.setUser(entityUser);
+        npcService.saveNpc(npc);
+        attributes.addFlashAttribute("Success", "Bohater niezależny został zapisany");
+        return "redirect:/npc/list";
+    }
+
+
 
     public Npc getNpc(Long id) {
         return npcService.findNpcById(id);
@@ -126,4 +150,10 @@ public class NpcController {
 
         return npc;
     }
+
+    public Long userId(Principal principal) {
+        return userService.findByUserName(principal.getName()).getId();
+    }
+
+
 }

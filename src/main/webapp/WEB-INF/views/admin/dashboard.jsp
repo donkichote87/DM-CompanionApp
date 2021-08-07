@@ -54,7 +54,7 @@
                     <tbody>
                     <c:forEach var="user" items="${users}">
                         <tr>
-                            <th scope="row">${user.username}</th>
+                            <td>${user.username}</td>
                             <td>${user.email}</td>
                             <td>
                                 <c:choose><c:when test="${fn:contains(user.role.id, '2')}"><spring:message
@@ -62,13 +62,11 @@
                                         code="user.roleUser"/></c:otherwise></c:choose>
                             </td>
                             <td>${npcService.findNpcsByUserId(user.id).size()}</td>
-                            <td>
-                                    <%--                takie samo jak wyżej tylko dla graczy--%>
-                            </td>
+                            <td> ${playerService.findAllByUserIdOrderByIdDesc(user.id).size()}</td>
                             <td>
                                 <a href="/admin/role/${user.id}" class="btn btn-info btn-sm"><spring:message
                                         code="admin.roleChange"/></a>
-                                <c:if test="${user.id != curentUser.id}">
+                                <c:if test="${user.username != currentUser}">
                                 <a href="/admin/confirm/${user.id}" class="btn btn-info btn-sm"><spring:message
                                         code="admin.blockUser"/></a>
                                 </c:if>
