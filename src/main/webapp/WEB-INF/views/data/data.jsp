@@ -90,6 +90,22 @@
                                     code="list.details"/></a>
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.mannerism"/></th>
+                        <th scope="row">${mannerismsCount}</th>
+                        <td>
+                            <a href="/admin/data/mannerism" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.interaction"/></th>
+                        <th scope="row">${interactionsCount}</th>
+                        <td>
+                            <a href="/admin/data/interaction" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

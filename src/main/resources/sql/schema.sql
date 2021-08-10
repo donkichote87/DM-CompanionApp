@@ -139,3 +139,19 @@ CREATE TABLE IF NOT EXISTS `talents` (
                            PRIMARY KEY (`id`),
                            UNIQUE KEY `UK_8gcfs9v96nw5o9vvofvhk5h31` (`description`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+CREATE TABLE IF NOT EXISTS `mannerisms` (
+                              `id` bigint NOT NULL AUTO_INCREMENT,
+                              `description` varchar(255) DEFAULT NULL,
+                              PRIMARY KEY (`id`),
+                              UNIQUE KEY `UK_qwuprr521el9sdecqh4juy40g` (`description`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+CREATE TABLE IF NOT EXISTS `interactions` (
+                                `id` bigint NOT NULL AUTO_INCREMENT,
+                                `interaction_female` varchar(100) DEFAULT NULL,
+                                `interaction_male` varchar(100) DEFAULT NULL,
+                                PRIMARY KEY (`id`),
+                                UNIQUE KEY `UK_3btdrw6px39rwfool6sf22s5e` (`interaction_female`),
+                                UNIQUE KEY `UK_pka3cnmm5kybiht7ckonqtkxm` (`interaction_male`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;

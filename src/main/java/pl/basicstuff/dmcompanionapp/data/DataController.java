@@ -14,8 +14,12 @@ import pl.basicstuff.dmcompanionapp.data.characterclass.CharacterClass;
 import pl.basicstuff.dmcompanionapp.data.characterclass.CharacterClassService;
 import pl.basicstuff.dmcompanionapp.data.firstname.FirstName;
 import pl.basicstuff.dmcompanionapp.data.firstname.FirstNameService;
+import pl.basicstuff.dmcompanionapp.data.interaction.Interaction;
+import pl.basicstuff.dmcompanionapp.data.interaction.InteractionService;
 import pl.basicstuff.dmcompanionapp.data.lastname.LastName;
 import pl.basicstuff.dmcompanionapp.data.lastname.LastNameService;
+import pl.basicstuff.dmcompanionapp.data.mannerism.Mannerism;
+import pl.basicstuff.dmcompanionapp.data.mannerism.MannerismService;
 import pl.basicstuff.dmcompanionapp.data.occupation.Occupation;
 import pl.basicstuff.dmcompanionapp.data.occupation.OccupationService;
 import pl.basicstuff.dmcompanionapp.data.race.Race;
@@ -40,6 +44,8 @@ public class DataController {
     private final OccupationService occupationService;
     private final AppearanceService appearanceService;
     private final TalentService talentService;
+    private final MannerismService mannerismService;
+    private final InteractionService interactionService;
 
 
     @GetMapping("")
@@ -52,7 +58,8 @@ public class DataController {
         model.addAttribute("occupationsCount", occupationService.occupationsList().size());
         model.addAttribute("appearancesCount", appearanceService.appearancesList().size());
         model.addAttribute("talentsCount", talentService.talentsList().size());
-
+        model.addAttribute("mannerismsCount", mannerismService.mannerismsList().size());
+        model.addAttribute("interactionsCount", interactionService.interactionsList().size());
         return "data/data";
     }
 
@@ -413,6 +420,98 @@ public class DataController {
         talentService.deleteTalent(talent);
         attributes.addFlashAttribute("Success", "Talent został pomyślnie usunięty");
         return "redirect:/admin/data/talent";
+    }
+
+    @GetMapping("/mannerism")
+    public String mannerismDashboard(Model model) {
+        model.addAttribute("mannerism", new Mannerism());
+        model.addAttribute("mannerisms", mannerismService.mannerismsList());
+        return "data/mannerism";
+    }
+
+    @PostMapping("/mannerism")
+    public String saveMannerism(@Valid Mannerism mannerism, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("mannerisms", mannerismService.mannerismsList());
+            return "data/mannerism";
+        }
+
+        mannerismService.saveMannerism(mannerism);
+        attributes.addFlashAttribute("Success", "Zachowanie zostało dodane do bazy danych");
+        return "redirect:/admin/data/mannerism";
+    }
+
+    @GetMapping("/mannerism/{id}")
+    public String mannerismEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("mannerism", mannerismService.findMannerismById(id));
+        model.addAttribute("mannerisms", mannerismService.mannerismsList());
+        return "data/mannerism";
+    }
+
+    @PostMapping("/mannerism/{id}")
+    public String saveMannerismEdit(@Valid Mannerism mannerism, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("mannerisms", mannerismService.mannerismsList());
+            return "data/mannerism";
+        }
+
+        mannerismService.updateMannerism(mannerism);
+        attributes.addFlashAttribute("Success", "Zachowanie zostało pomyślnie nadpisane");
+        return "redirect:/admin/data/mannerism";
+    }
+
+    @GetMapping("/mannerism/delete/{id}")
+    public String mannerismDelete(@PathVariable Long id, RedirectAttributes attributes) {
+        Mannerism mannerism = mannerismService.findMannerismById(id);
+        mannerismService.deleteMannerism(mannerism);
+        attributes.addFlashAttribute("Success", "Zachowanie zostało pomyślnie usunięte");
+        return "redirect:/admin/data/mannerism";
+    }
+
+    @GetMapping("/interaction")
+    public String interactionDashboard(Model model) {
+        model.addAttribute("interaction", new Interaction());
+        model.addAttribute("interactions", interactionService.interactionsList());
+        return "data/interaction";
+    }
+
+    @PostMapping("/interaction")
+    public String saveInteraction(@Valid Interaction interaction, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("interactions", interactionService.interactionsList());
+            return "data/interaction";
+        }
+
+        interactionService.saveInteraction(interaction);
+        attributes.addFlashAttribute("Success", "Nastawienie zostało dodane do bazy danych");
+        return "redirect:/admin/data/interaction";
+    }
+
+    @GetMapping("/interaction/{id}")
+    public String interactionEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("interaction", interactionService.findInteractionById(id));
+        model.addAttribute("interactions", interactionService.interactionsList());
+        return "data/interaction";
+    }
+
+    @PostMapping("/interaction/{id}")
+    public String saveInteractionEdit(@Valid Interaction interaction, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("interactions", interactionService.interactionsList());
+            return "data/interaction";
+        }
+
+        interactionService.updateInteraction(interaction);
+        attributes.addFlashAttribute("Success", "Nastawienie zostało pomyślnie nadpisane");
+        return "redirect:/admin/data/interaction";
+    }
+
+    @GetMapping("/interaction/delete/{id}")
+    public String interactionDelete(@PathVariable Long id, RedirectAttributes attributes) {
+        Interaction interaction = interactionService.findInteractionById(id);
+        interactionService.deleteInteraction(interaction);
+        attributes.addFlashAttribute("Success", "Nastawienie zostało pomyślnie usunięte");
+        return "redirect:/admin/data/interaction";
     }
 
     @ModelAttribute("generalRacesList")

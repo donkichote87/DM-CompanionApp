@@ -13,8 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.basicstuff.dmcompanionapp.data.appearance.AppearanceService;
 import pl.basicstuff.dmcompanionapp.data.firstname.FirstName;
 import pl.basicstuff.dmcompanionapp.data.firstname.FirstNameService;
+import pl.basicstuff.dmcompanionapp.data.interaction.InteractionService;
 import pl.basicstuff.dmcompanionapp.data.lastname.LastName;
 import pl.basicstuff.dmcompanionapp.data.lastname.LastNameService;
+import pl.basicstuff.dmcompanionapp.data.mannerism.MannerismService;
 import pl.basicstuff.dmcompanionapp.data.occupation.OccupationService;
 import pl.basicstuff.dmcompanionapp.data.race.Race;
 import pl.basicstuff.dmcompanionapp.data.race.RaceService;
@@ -42,6 +44,8 @@ public class NpcController {
     private final OccupationService occupationService;
     private final AppearanceService appearanceService;
     private final TalentService talentService;
+    private final MannerismService mannerismService;
+    private final InteractionService interactionService;
 
     @GetMapping("/create")
     public String npcCreateForm(Model model) {
@@ -147,10 +151,14 @@ public class NpcController {
 
         randomNpc.setAppearance(appearanceService.getRandomAppearance().getDescription());
         randomNpc.setTalent(talentService.getRandomTalent().getDescription());
+        randomNpc.setMannerism(mannerismService.getRandomMannerism().getDescription());
         if (sex.equals("M")) {
             randomNpc.setOccupation(occupationService.getRandomOccupation().getNameMale());
+            randomNpc.setInteraction(interactionService.getRandomInteraction().getInteractionMale());
         } else {
             randomNpc.setOccupation(occupationService.getRandomOccupation().getNameFemale());
+            randomNpc.setInteraction(interactionService.getRandomInteraction().getInteractionFemale());
+
         }
 
         model.addAttribute("npc", randomNpc);
