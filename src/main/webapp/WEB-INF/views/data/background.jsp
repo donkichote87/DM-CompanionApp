@@ -21,11 +21,12 @@
       <div class="card text-white bg-secondary mb-3">
         <div class="card-header"><spring:message code="data.newBackground"/></div>
         <div class="card-body" >
-          <form:form method="post" modelAttribute="newBackground" style="display: flex; justify-content: space-around">
+          <form:form method="post" modelAttribute="background" style="display: flex; justify-content: space-around">
             <form:hidden path="id"/>
 
 
             <label><spring:message code="player.background"/>:<form:input path="name"/>
+              <form:errors path="name" cssClass="error"/>
             </label>
 
             <label>
@@ -40,7 +41,7 @@
   <br><br>
   <div class="row">
     <div class="card text-white bg-secondary mb-3">
-      <div class="card-header"><spring:message code="data.lastNameList"/></div>
+      <div class="card-header"><spring:message code="data.backgroundList"/></div>
       <div class="card-body">
         <table class="table table-hover" style="width: 100%">
           <colgroup>

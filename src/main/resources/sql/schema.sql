@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `first_names` (
                                `id` bigint NOT NULL AUTO_INCREMENT,
                                `name` varchar(60) DEFAULT NULL,
                                `race` varchar(255) DEFAULT NULL,
-                               `sex` char(1) NOT NULL,
+                               `sex` varchar(1) NOT NULL,
                                PRIMARY KEY (`id`),
                                UNIQUE KEY `UK_fvmlv6jddrc1tr7k1wwhi6ayd` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
@@ -116,3 +116,26 @@ CREATE TABLE IF NOT EXISTS `players` (
                            CONSTRAINT `FKib4f8f03xdlynowtunidtf5i8` FOREIGN KEY (`background_id`) REFERENCES `backgrounds` (`id`),
                            CONSTRAINT `FKqinih0fh3c42gsamvg1cgh8un` FOREIGN KEY (`race_id`) REFERENCES `races` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+CREATE TABLE IF NOT EXISTS `occupations` (
+                               `id` bigint NOT NULL AUTO_INCREMENT,
+                               `name_female` varchar(100) DEFAULT NULL,
+                               `name_male` varchar(100) DEFAULT NULL,
+                               PRIMARY KEY (`id`),
+                               UNIQUE KEY `UK_jjkyo4e1yc99o9whte4h4x3ko` (`name_female`),
+                               UNIQUE KEY `UK_pit7b8tejk7apvdbhivtoyrru` (`name_male`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+CREATE TABLE IF NOT EXISTS `appearances` (
+                               `id` bigint NOT NULL AUTO_INCREMENT,
+                               `description` varchar(255) DEFAULT NULL,
+                               PRIMARY KEY (`id`),
+                               UNIQUE KEY `UK_qtl716ec7wgntp034klsqo4nc` (`description`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+CREATE TABLE IF NOT EXISTS `talents` (
+                           `id` bigint NOT NULL AUTO_INCREMENT,
+                           `description` varchar(255) DEFAULT NULL,
+                           PRIMARY KEY (`id`),
+                           UNIQUE KEY `UK_8gcfs9v96nw5o9vvofvhk5h31` (`description`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;

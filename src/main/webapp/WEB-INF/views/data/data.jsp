@@ -66,6 +66,30 @@
                                     code="list.details"/></a>
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.occupation"/></th>
+                        <th scope="row">${occupationsCount}</th>
+                        <td>
+                            <a href="/admin/data/occupation" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.appearance"/></th>
+                        <th scope="row">${appearancesCount}</th>
+                        <td>
+                            <a href="/admin/data/appearance" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.talent"/></th>
+                        <th scope="row">${talentsCount}</th>
+                        <td>
+                            <a href="/admin/data/talent" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

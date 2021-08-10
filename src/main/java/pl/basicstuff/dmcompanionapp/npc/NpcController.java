@@ -10,13 +10,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.basicstuff.dmcompanionapp.data.appearance.AppearanceService;
+import pl.basicstuff.dmcompanionapp.data.firstname.FirstName;
+import pl.basicstuff.dmcompanionapp.data.firstname.FirstNameService;
+import pl.basicstuff.dmcompanionapp.data.lastname.LastName;
+import pl.basicstuff.dmcompanionapp.data.lastname.LastNameService;
+import pl.basicstuff.dmcompanionapp.data.occupation.OccupationService;
+import pl.basicstuff.dmcompanionapp.data.race.Race;
+import pl.basicstuff.dmcompanionapp.data.race.RaceService;
+import pl.basicstuff.dmcompanionapp.data.talent.TalentService;
 import pl.basicstuff.dmcompanionapp.user.CurrentUser;
 import pl.basicstuff.dmcompanionapp.user.User;
 import pl.basicstuff.dmcompanionapp.user.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,6 +36,12 @@ import java.util.List;
 public class NpcController {
     private final NpcService npcService;
     private final UserService userService;
+    private final FirstNameService firstNameService;
+    private final LastNameService lastNameService;
+    private final RaceService raceService;
+    private final OccupationService occupationService;
+    private final AppearanceService appearanceService;
+    private final TalentService talentService;
 
     @GetMapping("/create")
     public String npcCreateForm(Model model) {
@@ -112,7 +130,30 @@ public class NpcController {
 
     @GetMapping("/random")
     public String npcRandomForm(Model model) {
-        model.addAttribute("npc", new Npc());
+        Npc randomNpc = new Npc();
+        Race race = raceService.getRandomRace();
+        String sex = randomSex();
+
+        randomNpc.setRace(race.getSubRace());
+        randomNpc.setSex(sex);
+
+        FirstName firstName = firstNameService.getRandomFirstName(race, sex);
+        LastName lastName = lastNameService.getRandomLastName(race);
+        if (lastName != null) {
+            randomNpc.setName(firstName.getName() + " " + lastName.getName());
+        } else {
+            randomNpc.setName(firstName.getName());
+        }
+
+        randomNpc.setAppearance(appearanceService.getRandomAppearance().getDescription());
+        randomNpc.setTalent(talentService.getRandomTalent().getDescription());
+        if (sex.equals("M")) {
+            randomNpc.setOccupation(occupationService.getRandomOccupation().getNameMale());
+        } else {
+            randomNpc.setOccupation(occupationService.getRandomOccupation().getNameFemale());
+        }
+
+        model.addAttribute("npc", randomNpc);
         return "npc/npc-form";
     }
 
@@ -128,7 +169,6 @@ public class NpcController {
         attributes.addFlashAttribute("Success", "Bohater niezależny został zapisany");
         return "redirect:/npc/list";
     }
-
 
 
     public Npc getNpc(Long id) {
@@ -155,5 +195,9 @@ public class NpcController {
         return userService.findByUserName(principal.getName()).getId();
     }
 
-
+    public String randomSex() {
+        Random random = new Random();
+        List<String> sexes = new ArrayList<>(Arrays.asList("M", "F"));
+        return sexes.get(random.nextInt(sexes.size()));
+    }
 }

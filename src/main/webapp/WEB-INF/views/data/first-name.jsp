@@ -21,26 +21,29 @@
             <div class="card text-white bg-secondary mb-3">
                 <div class="card-header"><spring:message code="data.newFirstName"/></div>
                 <div class="card-body" >
-                    <form:form method="post" modelAttribute="newName" style="display: flex; justify-content: space-around">
+                    <form:form method="post" modelAttribute="firstName" style="display: flex; justify-content: space-around">
                         <form:hidden path="id"/>
 
 
                                 <label><spring:message code="data.firstName"/>:<form:input path="name"/>
+                                    <form:errors path="name" cssClass="error"/>
                                 </label>
 
                                 <label><spring:message code="data.race"/>:<form:select path="race">
-                                        <form:option value="0"><spring:message code="form.chooseOne"/></form:option>
+                                        <form:option value="${null}"><spring:message code="form.chooseOne"/></form:option>
                                         <form:options items="${generalRacesList}"/>
                                     </form:select>
+                                    <form:errors path="race" cssClass="error"/>
                                 </label>
 
                                 <label>
                                     <spring:message code="char.sex"/>:
                                     <form:select path="sex">
-                                        <form:option value="-" label="Wybierz"/>
+                                        <form:option value="${null}" label="Wybierz"/>
                                         <form:option value="M" label="Mężczyzna"/>
                                         <form:option value="F" label="Kobieta"/>
                                     </form:select>
+                                    <form:errors path="sex" cssClass="error"/>
                                 </label>
 
                                 <label>

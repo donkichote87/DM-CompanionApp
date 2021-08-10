@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: xyz
-  Date: 04.08.2021
-  Time: 11:45
+  Date: 10.08.2021
+  Time: 00:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -19,21 +19,14 @@
 
     <div class="col-sm-12">
       <div class="card text-white bg-secondary mb-3">
-        <div class="card-header"><spring:message code="data.newLastName"/></div>
+        <div class="card-header"><spring:message code="data.newTalent"/></div>
         <div class="card-body" >
-          <form:form method="post" modelAttribute="lastName" style="display: flex; justify-content: space-around">
+          <form:form method="post" modelAttribute="talent" style="display: flex; justify-content: space-around">
             <form:hidden path="id"/>
 
 
-            <label><spring:message code="data.lastName"/>:<form:input path="name"/>
-              <form:errors path="name" cssClass="error"/>
-            </label>
-
-            <label><spring:message code="data.race"/>:<form:select path="race">
-              <form:option value="${null}"><spring:message code="form.chooseOne"/></form:option>
-              <form:options items="${generalRacesList}"/>
-            </form:select>
-              <form:errors path="race" cssClass="error"/>
+            <label><spring:message code="char.talent"/>:<form:input cssStyle="width: 500px" path="description"/>
+              <form:errors path="description" cssClass="error"/>
             </label>
 
             <label>
@@ -48,31 +41,27 @@
   <br><br>
   <div class="row">
     <div class="card text-white bg-secondary mb-3">
-      <div class="card-header"><spring:message code="data.lastNameList"/></div>
+      <div class="card-header"><spring:message code="data.talentList"/></div>
       <div class="card-body">
         <table class="table table-hover" style="width: 100%">
           <colgroup>
-            <col span="1" style="width: 33%">
-            <col span="1" style="width: 33%">
-            <col span="1" style="width: 33%">
+            <col span="1" style="width: 70%">
+            <col span="1" style="width: 30%">
           </colgroup>
           <thead>
           <tr>
-            <th scope="col"><spring:message code="data.lastName"/></th>
-            <th scope="col"><spring:message code="data.race"/></th>
+            <th scope="col"><spring:message code="char.talent"/></th>
             <th></th>
           </tr>
           </thead>
           <tbody>
-          <c:forEach var="name" items="${names}">
+          <c:forEach var="talent" items="${talents}">
             <tr>
-              <th scope="row">${name.name}</th>
-              <td>${name.race}</td>
-
+              <th scope="row">${talent.description}</th>
               <td>
-                <a href="/admin/data/last-name/${name.id}" class="btn btn-info btn-sm"><spring:message
+                <a href="/admin/data/talent/${talent.id}" class="btn btn-info btn-sm"><spring:message
                         code="list.edit"/></a>
-                <a href="/admin/data/last-name/delete/${name.id}" class="btn btn-info btn-sm"><spring:message
+                <a href="/admin/data/talent/delete/${talent.id}" class="btn btn-info btn-sm"><spring:message
                         code="list.delete"/></a>
               </td>
             </tr>
@@ -85,3 +74,4 @@
 </div>
 <br><br>
 <%@include file="/WEB-INF/views/app/footer.jsp" %>
+

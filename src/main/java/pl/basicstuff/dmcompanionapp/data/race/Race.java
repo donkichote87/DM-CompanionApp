@@ -1,8 +1,10 @@
 package pl.basicstuff.dmcompanionapp.data.race;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -12,8 +14,10 @@ public class Race {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     @Column(length = 60)
     private String generalRace;
+    @NotBlank
     @Column(length = 60, unique = true)
     private String subRace;
 

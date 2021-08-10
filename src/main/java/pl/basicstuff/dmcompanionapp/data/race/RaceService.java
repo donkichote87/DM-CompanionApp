@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +29,11 @@ public class RaceService {
 
     public Race findRaceById(Long id) {
         return raceRepository.findRaceById(id);
+    }
+
+    public Race getRandomRace() {
+        Random random = new Random();
+        List<Race> races = racesList();
+        return races.get(random.nextInt(races.size()));
     }
 }

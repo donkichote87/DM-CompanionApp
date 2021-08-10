@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: xyz
-  Date: 04.08.2021
-  Time: 12:57
+  Date: 09.08.2021
+  Time: 23:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -19,14 +19,14 @@
 
         <div class="col-sm-12">
             <div class="card text-white bg-secondary mb-3">
-                <div class="card-header"><spring:message code="data.newClass"/></div>
+                <div class="card-header"><spring:message code="data.newAppearance"/></div>
                 <div class="card-body" >
-                    <form:form method="post" modelAttribute="characterClass" style="display: flex; justify-content: space-around">
+                    <form:form method="post" modelAttribute="appearance" style="display: flex; justify-content: space-around">
                         <form:hidden path="id"/>
 
 
-                        <label><spring:message code="player.class"/>:<form:input path="name"/>
-                            <form:errors path="name" cssClass="error"/>
+                        <label><spring:message code="char.appearance"/>:<form:input cssStyle="width: 500px" path="description"/>
+                            <form:errors path="description" cssClass="error"/>
                         </label>
 
                         <label>
@@ -41,28 +41,27 @@
     <br><br>
     <div class="row">
         <div class="card text-white bg-secondary mb-3">
-            <div class="card-header"><spring:message code="data.classList"/></div>
+            <div class="card-header"><spring:message code="data.appearanceList"/></div>
             <div class="card-body">
                 <table class="table table-hover" style="width: 100%">
                     <colgroup>
-                        <col span="1" style="width: 50%">
-                        <col span="1" style="width: 50%">
+                        <col span="1" style="width: 70%">
+                        <col span="1" style="width: 30%">
                     </colgroup>
                     <thead>
                     <tr>
-                        <th scope="col"><spring:message code="player.class"/></th>
+                        <th scope="col"><spring:message code="char.appearance"/></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="characterClass" items="${classes}">
+                    <c:forEach var="appearance" items="${appearances}">
                         <tr>
-                            <th scope="row">${characterClass.name}</th>
-
+                            <th scope="row">${appearance.description}</th>
                             <td>
-                                <a href="/admin/data/class/${characterClass.id}" class="btn btn-info btn-sm"><spring:message
+                                <a href="/admin/data/appearance/${appearance.id}" class="btn btn-info btn-sm"><spring:message
                                         code="list.edit"/></a>
-                                <a href="/admin/data/class/delete/${characterClass.id}" class="btn btn-info btn-sm"><spring:message
+                                <a href="/admin/data/appearance/delete/${appearance.id}" class="btn btn-info btn-sm"><spring:message
                                         code="list.delete"/></a>
                             </td>
                         </tr>

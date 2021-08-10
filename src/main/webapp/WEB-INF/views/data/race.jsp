@@ -21,14 +21,16 @@
             <div class="card text-white bg-secondary mb-3">
                 <div class="card-header"><spring:message code="data.newRace"/></div>
                 <div class="card-body" >
-                    <form:form method="post" modelAttribute="newRace" style="display: flex; justify-content: space-around">
+                    <form:form method="post" modelAttribute="race" style="display: flex; justify-content: space-around">
                         <form:hidden path="id"/>
 
 
                         <label><spring:message code="data.race"/>:<form:input path="generalRace"/>
+                            <form:errors path="generalRace" cssClass="error"/>
                         </label>
 
                         <label><spring:message code="data.subRace"/>:<form:input path="subRace"/>
+                            <form:errors path="subRace" cssClass="error"/>
                         </label>
 
                         <label>

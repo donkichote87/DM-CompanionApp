@@ -1,6 +1,7 @@
 package pl.basicstuff.dmcompanionapp.data.lastname;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import pl.basicstuff.dmcompanionapp.data.race.Race;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,4 +14,5 @@ public interface LastNameRepository extends JpaRepository<LastName, Long> {
     List<LastName> findAllByRace(String race);
 
     LastName findLastNameById(Long id);
+
 }

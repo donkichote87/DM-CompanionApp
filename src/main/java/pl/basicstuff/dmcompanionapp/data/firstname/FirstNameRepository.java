@@ -11,7 +11,7 @@ import java.util.List;
 public interface FirstNameRepository extends JpaRepository<FirstName, Long> {
 
 
-    List<FirstName> findAllByRaceAndSex(String race, char sex);
+    List<FirstName> findAllByRaceAndSex(String race, String sex);
 
     FirstName findFirstNameById(Long id);
 }

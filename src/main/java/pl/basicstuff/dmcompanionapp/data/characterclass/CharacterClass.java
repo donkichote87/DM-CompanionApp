@@ -2,8 +2,10 @@ package pl.basicstuff.dmcompanionapp.data.characterclass;
 
 
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -13,6 +15,7 @@ public class CharacterClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     @Column(length = 60, unique = true)
     private String name;
 }

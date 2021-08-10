@@ -1,5 +1,4 @@
-package pl.basicstuff.dmcompanionapp.data.background;
-
+package pl.basicstuff.dmcompanionapp.data.appearance;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.UniqueElements;
@@ -9,13 +8,13 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
-@Table(name = Background.TABLE_NAME)
-public class Background {
-    public static final String TABLE_NAME = "backgrounds";
+@Table(name = Appearance.TABLE_NAME)
+public class Appearance {
+    public static final String TABLE_NAME = "appearances";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @Column(length = 60, unique = true)
-    private String name;
+    @Column(unique = true)
+    private String description;
 }
