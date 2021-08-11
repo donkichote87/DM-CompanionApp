@@ -14,6 +14,6 @@ public class Talent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @Column(unique = true)
+    @Column(unique = true, length = 191)
     private String description;
 }

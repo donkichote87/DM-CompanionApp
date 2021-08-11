@@ -128,21 +128,21 @@ CREATE TABLE IF NOT EXISTS `occupations` (
 
 CREATE TABLE IF NOT EXISTS `appearances` (
                                `id` bigint NOT NULL AUTO_INCREMENT,
-                               `description` varchar(255) DEFAULT NULL,
+                               `description` varchar(191) DEFAULT NULL,
                                PRIMARY KEY (`id`),
                                UNIQUE KEY `UK_qtl716ec7wgntp034klsqo4nc` (`description`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 CREATE TABLE IF NOT EXISTS `talents` (
                            `id` bigint NOT NULL AUTO_INCREMENT,
-                           `description` varchar(255) DEFAULT NULL,
+                           `description` varchar(191) DEFAULT NULL,
                            PRIMARY KEY (`id`),
                            UNIQUE KEY `UK_8gcfs9v96nw5o9vvofvhk5h31` (`description`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 CREATE TABLE IF NOT EXISTS `mannerisms` (
                               `id` bigint NOT NULL AUTO_INCREMENT,
-                              `description` varchar(255) DEFAULT NULL,
+                              `description` varchar(191) DEFAULT NULL,
                               PRIMARY KEY (`id`),
                               UNIQUE KEY `UK_qwuprr521el9sdecqh4juy40g` (`description`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
@@ -169,14 +169,14 @@ CREATE TABLE IF NOT EXISTS `abilities` (
 
 CREATE TABLE IF NOT EXISTS `bonds` (
                          `id` bigint NOT NULL AUTO_INCREMENT,
-                         `description` varchar(255) DEFAULT NULL,
+                         `description` varchar(191) DEFAULT NULL,
                          PRIMARY KEY (`id`),
                          UNIQUE KEY `UK_l6f0f0hhl94cf4m7lsseevhwp` (`description`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 CREATE TABLE IF NOT EXISTS `flaws_or_secrets` (
                                     `id` bigint NOT NULL AUTO_INCREMENT,
-                                    `description` varchar(255) DEFAULT NULL,
+                                    `description` varchar(191) DEFAULT NULL,
                                     PRIMARY KEY (`id`),
                                     UNIQUE KEY `UK_gfdm142rn8pojaxqwrkg01pp3` (`description`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
