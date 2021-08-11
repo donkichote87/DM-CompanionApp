@@ -1,6 +1,7 @@
 package pl.basicstuff.dmcompanionapp.player;
 
 import lombok.Data;
+import pl.basicstuff.dmcompanionapp.data.alignment.Alignment;
 import pl.basicstuff.dmcompanionapp.data.background.Background;
 import pl.basicstuff.dmcompanionapp.data.characterclass.CharacterClass;
 import pl.basicstuff.dmcompanionapp.data.race.Race;
@@ -34,6 +35,9 @@ public class Player {
     @NotNull
     @ManyToOne
     private Background background;
+    @NotBlank
+    @Column(length = 50)
+    private String alignment;
     private int strengthAbility;
     private int dexterityAbility;
     private int conditionAbility;

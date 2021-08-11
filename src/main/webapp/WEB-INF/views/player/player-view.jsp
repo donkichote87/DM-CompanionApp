@@ -26,6 +26,15 @@
                             </label>
                         </div>
                     </div>
+                    <div class="col-sm">
+                        <div style="display: flex; justify-content: start">
+                            <label>
+                                <spring:message code="char.alignment"/>:
+                                <br>
+                                <p style="color: black">${player.alignment}</p>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm">

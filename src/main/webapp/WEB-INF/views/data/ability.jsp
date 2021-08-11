@@ -61,7 +61,7 @@
   <br><br>
   <div class="row">
     <div class="card text-white bg-secondary mb-3">
-      <div class="card-header"><spring:message code="data.firstNameList"/></div>
+      <div class="card-header"><spring:message code="data.abilityList"/></div>
       <div class="card-body">
         <table class="table table-hover" style="width: 100%">
           <colgroup>

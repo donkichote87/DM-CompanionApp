@@ -28,6 +28,20 @@
                             </label>
                         </div>
                     </div>
+                    <div class="col-sm">
+                        <div style="display: flex; justify-content: start">
+                            <label>
+                                <spring:message code="char.alignment"/>:
+                                <br>
+                                <form:select path="alignment">
+                                    <form:option value="${null}"><spring:message code="form.chooseOne"/></form:option>
+                                    <form:options items="${alignments}" itemLabel="nature" itemValue="nature"/>
+                                </form:select>
+                                <br>
+                                <form:errors path="alignment" cssClass="error"/>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm">

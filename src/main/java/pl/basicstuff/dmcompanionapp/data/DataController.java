@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.basicstuff.dmcompanionapp.data.ability.Ability;
 import pl.basicstuff.dmcompanionapp.data.ability.AbilityService;
+import pl.basicstuff.dmcompanionapp.data.alignment.Alignment;
+import pl.basicstuff.dmcompanionapp.data.alignment.AlignmentService;
 import pl.basicstuff.dmcompanionapp.data.appearance.Appearance;
 import pl.basicstuff.dmcompanionapp.data.appearance.AppearanceService;
 import pl.basicstuff.dmcompanionapp.data.background.Background;
@@ -20,6 +22,8 @@ import pl.basicstuff.dmcompanionapp.data.firstname.FirstName;
 import pl.basicstuff.dmcompanionapp.data.firstname.FirstNameService;
 import pl.basicstuff.dmcompanionapp.data.flaworsecret.FlawOrSecret;
 import pl.basicstuff.dmcompanionapp.data.flaworsecret.FlawOrSecretService;
+import pl.basicstuff.dmcompanionapp.data.ideal.Ideal;
+import pl.basicstuff.dmcompanionapp.data.ideal.IdealService;
 import pl.basicstuff.dmcompanionapp.data.interaction.Interaction;
 import pl.basicstuff.dmcompanionapp.data.interaction.InteractionService;
 import pl.basicstuff.dmcompanionapp.data.lastname.LastName;
@@ -32,6 +36,8 @@ import pl.basicstuff.dmcompanionapp.data.race.Race;
 import pl.basicstuff.dmcompanionapp.data.race.RaceService;
 import pl.basicstuff.dmcompanionapp.data.talent.Talent;
 import pl.basicstuff.dmcompanionapp.data.talent.TalentService;
+import pl.basicstuff.dmcompanionapp.data.usefulknowledge.UsefulKnowledge;
+import pl.basicstuff.dmcompanionapp.data.usefulknowledge.UsefulKnowledgeService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -56,6 +62,9 @@ public class DataController {
     private final BondService bondService;
     private final FlawOrSecretService flawOrSecretService;
     private final AbilityService abilityService;
+    private final AlignmentService alignmentService;
+    private final IdealService idealService;
+    private final UsefulKnowledgeService usefulKnowledgeService;
 
 
     @GetMapping("")
@@ -73,6 +82,9 @@ public class DataController {
         model.addAttribute("bondsCount", bondService.bondsList().size());
         model.addAttribute("flawsOrSecretsCount", flawOrSecretService.flawsOrSecretsList().size());
         model.addAttribute("abilitiesCount", abilityService.abilitiesList().size());
+        model.addAttribute("alignmentsCount", alignmentService.alignmentsList().size());
+        model.addAttribute("idealsCount", idealService.idealsList().size());
+        model.addAttribute("usefulKnowledgeCount", usefulKnowledgeService.usefulKnowledgeList().size());
         return "data/data";
     }
 
@@ -665,6 +677,144 @@ public class DataController {
         return "redirect:/admin/data/ability";
     }
 
+    @GetMapping("/alignment")
+    public String alignmentDashboard(Model model) {
+        model.addAttribute("alignment", new Alignment());
+        model.addAttribute("alignments", alignmentService.alignmentsList());
+        return "data/alignment";
+    }
+
+    @PostMapping("/alignment")
+    public String saveAlignment(@Valid Alignment alignment, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("alignments", alignmentService.alignmentsList());
+            return "data/alignment";
+        }
+
+        alignmentService.saveAlignment(alignment);
+        attributes.addFlashAttribute("Success", "Charakter został dodany do bazy danych");
+        return "redirect:/admin/data/alignment";
+    }
+
+    @GetMapping("/alignment/{id}")
+    public String alignmentEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("alignment", alignmentService.findAlignmentById(id));
+        model.addAttribute("alignments", alignmentService.alignmentsList());
+        return "data/alignment";
+    }
+
+    @PostMapping("/alignment/{id}")
+    public String saveAlignmentEdit(@Valid Alignment alignment, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("alignments", alignmentService.alignmentsList());
+            return "data/alignment";
+        }
+
+        alignmentService.updateAlignment(alignment);
+        attributes.addFlashAttribute("Success", "Charakter został pomyślnie nadpisany");
+        return "redirect:/admin/data/alignment";
+    }
+
+    @GetMapping("/alignment/delete/{id}")
+    public String alignmentDelete(@PathVariable Long id, RedirectAttributes attributes) {
+        Alignment alignment = alignmentService.findAlignmentById(id);
+        alignmentService.deleteAlignment(alignment);
+        attributes.addFlashAttribute("Success", "Charakter został pomyślnie usunięta");
+        return "redirect:/admin/data/alignment";
+    }
+
+    @GetMapping("/ideal")
+    public String idealDashboard(Model model) {
+        model.addAttribute("ideal", new Ideal());
+        model.addAttribute("ideals", idealService.idealsList());
+        return "data/ideal";
+    }
+
+    @PostMapping("/ideal")
+    public String saveIdeal(@Valid Ideal ideal, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("ideals", idealService.idealsList());
+            return "data/ideal";
+        }
+
+        idealService.saveIdeal(ideal);
+        attributes.addFlashAttribute("Success", "Ideał został dodany do bazy danych");
+        return "redirect:/admin/data/ideal";
+    }
+
+    @GetMapping("/ideal/{id}")
+    public String idealEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("ideal", idealService.findIdealById(id));
+        model.addAttribute("ideals", idealService.idealsList());
+        return "data/ideal";
+    }
+
+    @PostMapping("/ideal/{id}")
+    public String saveIdealEdit(@Valid Ideal ideal, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("ideals", idealService.idealsList());
+            return "data/ideal";
+        }
+
+        idealService.updateIdeal(ideal);
+        attributes.addFlashAttribute("Success", "Ideał został pomyślnie nadpisany");
+        return "redirect:/admin/data/ideal";
+    }
+
+    @GetMapping("/ideal/delete/{id}")
+    public String idealDelete(@PathVariable Long id, RedirectAttributes attributes) {
+        Ideal ideal = idealService.findIdealById(id);
+        idealService.deleteIdeal(ideal);
+        attributes.addFlashAttribute("Success", "Ideał został pomyślnie usunięty");
+        return "redirect:/admin/data/ideal";
+    }
+
+    @GetMapping("/useful-knowledge")
+    public String usefulKnowledgeDashboard(Model model) {
+        model.addAttribute("usefulKnowledge", new UsefulKnowledge());
+        model.addAttribute("usefulKnowledgeList", usefulKnowledgeService.usefulKnowledgeList());
+        return "data/useful-knowledge";
+    }
+
+    @PostMapping("/useful-knowledge")
+    public String saveUsefulKnowledge(@Valid UsefulKnowledge usefulKnowledge, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("usefulKnowledgeList", usefulKnowledgeService.usefulKnowledgeList());
+            return "data/useful-knowledge";
+        }
+
+        usefulKnowledgeService.saveUsefulKnowledge(usefulKnowledge);
+        attributes.addFlashAttribute("Success", "Wiedza została dodany do bazy danych");
+        return "redirect:/admin/data/useful-knowledge";
+    }
+
+    @GetMapping("/useful-knowledge/{id}")
+    public String usefulKnowledgeEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("usefulKnowledge", usefulKnowledgeService.findUsefulKnowledgeById(id));
+        model.addAttribute("usefulKnowledgeList", usefulKnowledgeService.usefulKnowledgeList());
+        return "data/useful-knowledge";
+    }
+
+    @PostMapping("/useful-knowledge/{id}")
+    public String saveUsefulKnowledgeEdit(@Valid UsefulKnowledge usefulKnowledge, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("usefulKnowledgeList", usefulKnowledgeService.usefulKnowledgeList());
+            return "data/useful-knowledge";
+        }
+
+        usefulKnowledgeService.updateUsefulKnowledge(usefulKnowledge);
+        attributes.addFlashAttribute("Success", "Wiedza została pomyślnie nadpisana");
+        return "redirect:/admin/data/useful-knowledge";
+    }
+
+    @GetMapping("/useful-knowledge/delete/{id}")
+    public String usefulKnowledgeDelete(@PathVariable Long id, RedirectAttributes attributes) {
+        UsefulKnowledge usefulKnowledge = usefulKnowledgeService.findUsefulKnowledgeById(id);
+        usefulKnowledgeService.deleteUsefulKnowledge(usefulKnowledge);
+        attributes.addFlashAttribute("Success", "Wiedza została pomyślnie usunięta");
+        return "redirect:/admin/data/useful-knowledge";
+    }
+
     @ModelAttribute("generalRacesList")
     public List<String> getGeneralRaces() {
         List<Race> races = raceService.racesList();
@@ -689,7 +839,10 @@ public class DataController {
         return Arrays.asList("Wysoka", "Niska");
     }
 
-
+    @ModelAttribute("alignments")
+    public List<String> getAlignmentsList() {
+        return Arrays.asList("dobry", "zły", "neutralny", "praworządny", "chaotyczny", "inny");
+    }
 
 
 

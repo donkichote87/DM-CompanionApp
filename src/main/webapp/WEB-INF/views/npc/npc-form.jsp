@@ -31,6 +31,33 @@
                     <div class="col-sm">
                         <div style="display: flex; justify-content: start">
                             <label>
+                                <spring:message code="char.race"/>:
+                                <br>
+                                <form:input path="race"/>
+                                <br>
+                                <form:errors path="race" cssClass="error"/>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <div style="display: flex; justify-content: start">
+                            <label>
+                                <spring:message code="char.alignment"/>:
+                                <br>
+                                <form:select path="alignment">
+                                    <form:option value="${null}"><spring:message code="form.chooseOne"/></form:option>
+                                    <form:options items="${alignments}" itemLabel="nature" itemValue="nature"/>
+                                </form:select>
+                                <br>
+                                <form:errors path="alignment" cssClass="error"/>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div style="display: flex; justify-content: start">
+                            <label>
                                 <spring:message code="char.sex"/>:
                                 <br>
                                 <form:select path="sex">
@@ -46,15 +73,9 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <div style="display: flex; justify-content: start">
-                            <label>
-                                <spring:message code="char.race"/>:
-                                <br>
-                                <form:input path="race"/>
-                                <br>
-                                <form:errors path="race" cssClass="error"/>
-                            </label>
-                        </div>
+                        <spring:message code="char.history"/>:
+                        <br>
+                        <form:textarea path="history" rows="4" cols="50"/>
                     </div>
                     <div class="col-sm">
                         <div style="display: flex; justify-content: start">
@@ -66,20 +87,19 @@
                                 <form:errors path="occupation" cssClass="error"/>
                             </label>
                         </div>
+
+                        <div style="display: flex; justify-content: start">
+                            <label>
+                                <spring:message code="char.appearance"/>:
+                                <br>
+                                <form:textarea path="appearance" rows="2" cols="50"/>
+                            </label>
+                        </div>
+
+
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm">
-                        <spring:message code="char.history"/>:
-                        <br>
-                        <form:textarea path="history" rows="2" cols="50"/>
-                    </div>
-                    <div class="col-sm">
-                        <spring:message code="char.appearance"/>:
-                        <br>
-                        <form:textarea path="appearance" rows="2" cols="50"/>
-                    </div>
-                </div>
+
                 <div class="row">
                     <div class="col-sm">
                         <spring:message code="char.abilities"/>:
@@ -129,20 +149,23 @@
                     </div>
                 </div>
                 <br>
-                    <c:if test="${(fn:contains(url, 'random'))}">
-                        <div class="row">
+                <c:if test="${(fn:contains(url, 'random'))}">
+                    <div class="row">
                         <div><a href="/npc/random" class="btn btn-lg btn-info" style="width: 100%"><spring:message
                                 code="char.random"/></a></div>
-                        </div>
-                        <br>
-                    </c:if>
-                <div class="row">
-                    <div><button class="btn btn-lg btn-info" type="submit" style="width: 100%"><spring:message
-                            code="form.save"/></button></div>
-                </div>
+                    </div>
                     <br>
+                </c:if>
                 <div class="row">
-                    <div><a href="/npc/list" class="btn btn-lg btn-info" type="button" style="width: 100%"><spring:message
+                    <div>
+                        <button class="btn btn-lg btn-info" type="submit" style="width: 100%"><spring:message
+                                code="form.save"/></button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div><a href="/npc/list" class="btn btn-lg btn-info" type="button"
+                            style="width: 100%"><spring:message
                             code="char.list"/></a></div>
                 </div>
             </form:form>

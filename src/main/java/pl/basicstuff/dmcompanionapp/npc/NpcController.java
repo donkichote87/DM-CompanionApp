@@ -5,26 +5,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.basicstuff.dmcompanionapp.data.ability.AbilityService;
-import pl.basicstuff.dmcompanionapp.data.appearance.AppearanceService;
-import pl.basicstuff.dmcompanionapp.data.bond.BondService;
-import pl.basicstuff.dmcompanionapp.data.firstname.FirstName;
-import pl.basicstuff.dmcompanionapp.data.firstname.FirstNameService;
-import pl.basicstuff.dmcompanionapp.data.flaworsecret.FlawOrSecret;
-import pl.basicstuff.dmcompanionapp.data.flaworsecret.FlawOrSecretService;
-import pl.basicstuff.dmcompanionapp.data.interaction.InteractionService;
-import pl.basicstuff.dmcompanionapp.data.lastname.LastName;
-import pl.basicstuff.dmcompanionapp.data.lastname.LastNameService;
-import pl.basicstuff.dmcompanionapp.data.mannerism.MannerismService;
-import pl.basicstuff.dmcompanionapp.data.occupation.OccupationService;
-import pl.basicstuff.dmcompanionapp.data.race.Race;
-import pl.basicstuff.dmcompanionapp.data.race.RaceService;
-import pl.basicstuff.dmcompanionapp.data.talent.TalentService;
+import pl.basicstuff.dmcompanionapp.data.alignment.Alignment;
+import pl.basicstuff.dmcompanionapp.data.alignment.AlignmentService;
 import pl.basicstuff.dmcompanionapp.user.CurrentUser;
 import pl.basicstuff.dmcompanionapp.user.User;
 import pl.basicstuff.dmcompanionapp.user.service.UserService;
@@ -42,17 +26,15 @@ import java.util.Random;
 public class NpcController {
     private final NpcService npcService;
     private final UserService userService;
-    private final FirstNameService firstNameService;
-    private final LastNameService lastNameService;
-    private final RaceService raceService;
-    private final OccupationService occupationService;
-    private final AppearanceService appearanceService;
-    private final TalentService talentService;
-    private final MannerismService mannerismService;
-    private final InteractionService interactionService;
-    private final BondService bondService;
-    private final FlawOrSecretService flawOrSecretService;
-    private final AbilityService abilityService;
+    private final AlignmentService alignmentService;
+
+
+
+    @ModelAttribute("alignments")
+    public List<Alignment> getAlignments() {
+        return alignmentService.alignmentsList();
+    }
+
 
     @GetMapping("/create")
     public String npcCreateForm(Model model) {
@@ -141,31 +123,7 @@ public class NpcController {
 
     @GetMapping("/random")
     public String npcRandomForm(Model model) {
-        Npc randomNpc = new Npc();
-        Race race = raceService.getRandomRace();
-        String sex = randomSex();
-
-        randomNpc.setRace(race.getSubRace());
-        randomNpc.setSex(sex);
-
-        FirstName firstName = firstNameService.getRandomFirstName(race, sex);
-        LastName lastName = lastNameService.getRandomLastName(race);
-        if (lastName != null) {
-            randomNpc.setName(firstName.getName() + " " + lastName.getName());
-        } else {
-            randomNpc.setName(firstName.getName());
-        }
-
-        randomNpc.setAppearance(appearanceService.getRandomAppearance().getDescription());
-        randomNpc.setTalent(talentService.getRandomTalent().getDescription());
-        randomNpc.setMannerism(mannerismService.getRandomMannerism().getDescription());
-        randomNpc.setBond(bondService.getRandomBond());
-        randomNpc.setFlawOrSecret(flawOrSecretService.getRandomFlawOrSecret().getDescription());
-        randomNpc.setAbilities(abilityService.getRandomAbility(sex));
-        randomNpc.setOccupation(occupationService.getRandomOccupation(sex));
-        randomNpc.setInteraction(interactionService.getRandomInteraction(sex));
-
-        model.addAttribute("npc", randomNpc);
+        model.addAttribute("npc", npcService.getRandomNpc(randomSex()));
         return "npc/npc-form";
     }
 

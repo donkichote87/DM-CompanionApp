@@ -130,6 +130,30 @@
                                     code="list.details"/></a>
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.alignment"/></th>
+                        <th scope="row">${alignmentsCount}</th>
+                        <td>
+                            <a href="/admin/data/alignment" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.ideal"/></th>
+                        <th scope="row">${idealsCount}</th>
+                        <td>
+                            <a href="/admin/data/ideal" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.usefulKnowledge"/></th>
+                        <th scope="row">${usefulKnowledgeCount}</th>
+                        <td>
+                            <a href="/admin/data/useful-knowledge" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

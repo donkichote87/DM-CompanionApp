@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.basicstuff.dmcompanionapp.data.alignment.Alignment;
+import pl.basicstuff.dmcompanionapp.data.alignment.AlignmentService;
 import pl.basicstuff.dmcompanionapp.data.background.Background;
 import pl.basicstuff.dmcompanionapp.data.background.BackgroundService;
 import pl.basicstuff.dmcompanionapp.data.characterclass.CharacterClass;
@@ -31,6 +33,7 @@ public class PlayerController {
     private final RaceService raceService;
     private final BackgroundService backgroundService;
     private final UserService userService;
+    private final AlignmentService alignmentService;
 
     @ModelAttribute("races")
     public List<Race> getRaces() {
@@ -47,6 +50,10 @@ public class PlayerController {
         return backgroundService.backgroundsList();
     }
 
+    @ModelAttribute("alignments")
+    public List<Alignment> getAlignments() {
+        return alignmentService.alignmentsList();
+    }
 
     @GetMapping("/create")
     public String playerCreateForm(Model model) {

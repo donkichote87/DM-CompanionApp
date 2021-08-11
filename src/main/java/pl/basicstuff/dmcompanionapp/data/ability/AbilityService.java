@@ -44,11 +44,11 @@ public class AbilityService {
         List<Ability> badAbilities = findAbilitiesByQualityAndTraitNotLike("Niska", goodAbility.getTrait());
         Ability badAbility = badAbilities.get(random.nextInt(badAbilities.size()));
         if (sex.equals("M")) {
-            return goodAbility.getTrait() + " - " + goodAbility.getDescriptionMale()
-                    + "\n" + badAbility.getTrait() + " - " + badAbility.getDescriptionMale();
+            return goodAbility.getQuality()+ " " + goodAbility.getTrait() + " - " + goodAbility.getDescriptionMale()
+                    + "\n" + badAbility.getQuality()+ " " + badAbility.getTrait() + " - " + badAbility.getDescriptionMale();
         } else {
-            return goodAbility.getTrait() + " - " + goodAbility.getDescriptionFemale()
-                    + "\n" + badAbility.getTrait() + " - " + badAbility.getDescriptionFemale();
+            return goodAbility.getQuality()+ " " + goodAbility.getTrait() + " - " + goodAbility.getDescriptionFemale()
+                    + "\n" + badAbility.getQuality()+ " " + badAbility.getTrait() + " - " + badAbility.getDescriptionFemale();
         }
     }
 }

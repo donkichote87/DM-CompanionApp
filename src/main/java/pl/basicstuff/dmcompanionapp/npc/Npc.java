@@ -27,6 +27,9 @@ public class Npc {
     @NotBlank
     @Column(length = 50)
     private String race;
+    @NotNull
+    @Column(length = 50)
+    private String alignment;
     @NotBlank
     @Size(max = 50)
     @Column(length = 50)
