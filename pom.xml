@@ -10,7 +10,7 @@
     </parent>
     <groupId>pl.basicstuff</groupId>
     <artifactId>DM-CompanionApp</artifactId>
-    <version>0.0.25-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>DM-CompanionApp</name>
     <description>Schemat projektu koncowego</description>
     <properties>
