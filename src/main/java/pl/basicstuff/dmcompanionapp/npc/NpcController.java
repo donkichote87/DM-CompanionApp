@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.basicstuff.dmcompanionapp.data.ability.AbilityService;
 import pl.basicstuff.dmcompanionapp.data.appearance.AppearanceService;
+import pl.basicstuff.dmcompanionapp.data.bond.BondService;
 import pl.basicstuff.dmcompanionapp.data.firstname.FirstName;
 import pl.basicstuff.dmcompanionapp.data.firstname.FirstNameService;
+import pl.basicstuff.dmcompanionapp.data.flaworsecret.FlawOrSecret;
+import pl.basicstuff.dmcompanionapp.data.flaworsecret.FlawOrSecretService;
 import pl.basicstuff.dmcompanionapp.data.interaction.InteractionService;
 import pl.basicstuff.dmcompanionapp.data.lastname.LastName;
 import pl.basicstuff.dmcompanionapp.data.lastname.LastNameService;
@@ -46,6 +50,9 @@ public class NpcController {
     private final TalentService talentService;
     private final MannerismService mannerismService;
     private final InteractionService interactionService;
+    private final BondService bondService;
+    private final FlawOrSecretService flawOrSecretService;
+    private final AbilityService abilityService;
 
     @GetMapping("/create")
     public String npcCreateForm(Model model) {
@@ -152,14 +159,11 @@ public class NpcController {
         randomNpc.setAppearance(appearanceService.getRandomAppearance().getDescription());
         randomNpc.setTalent(talentService.getRandomTalent().getDescription());
         randomNpc.setMannerism(mannerismService.getRandomMannerism().getDescription());
-        if (sex.equals("M")) {
-            randomNpc.setOccupation(occupationService.getRandomOccupation().getNameMale());
-            randomNpc.setInteraction(interactionService.getRandomInteraction().getInteractionMale());
-        } else {
-            randomNpc.setOccupation(occupationService.getRandomOccupation().getNameFemale());
-            randomNpc.setInteraction(interactionService.getRandomInteraction().getInteractionFemale());
-
-        }
+        randomNpc.setBond(bondService.getRandomBond());
+        randomNpc.setFlawOrSecret(flawOrSecretService.getRandomFlawOrSecret().getDescription());
+        randomNpc.setAbilities(abilityService.getRandomAbility(sex));
+        randomNpc.setOccupation(occupationService.getRandomOccupation(sex));
+        randomNpc.setInteraction(interactionService.getRandomInteraction(sex));
 
         model.addAttribute("npc", randomNpc);
         return "npc/npc-form";
@@ -208,4 +212,6 @@ public class NpcController {
         List<String> sexes = new ArrayList<>(Arrays.asList("M", "F"));
         return sexes.get(random.nextInt(sexes.size()));
     }
+
+
 }

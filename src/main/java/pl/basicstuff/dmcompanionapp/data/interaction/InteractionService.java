@@ -31,9 +31,15 @@ public class InteractionService {
         return interactionRepository.findInteractionById(id);
     }
 
-    public Interaction getRandomInteraction() {
+    public String getRandomInteraction(String sex) {
         Random random = new Random();
         List<Interaction> interactions = interactionsList();
-        return interactions.get(random.nextInt(interactions.size()));
+        Interaction interaction = interactions.get(random.nextInt(interactions.size()));
+        if (sex.equals("M")) {
+            return interaction.getInteractionMale();
+        } else {
+
+            return interaction.getInteractionFemale();
+        }
     }
 }

@@ -6,14 +6,20 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.basicstuff.dmcompanionapp.data.ability.Ability;
+import pl.basicstuff.dmcompanionapp.data.ability.AbilityService;
 import pl.basicstuff.dmcompanionapp.data.appearance.Appearance;
 import pl.basicstuff.dmcompanionapp.data.appearance.AppearanceService;
 import pl.basicstuff.dmcompanionapp.data.background.Background;
 import pl.basicstuff.dmcompanionapp.data.background.BackgroundService;
+import pl.basicstuff.dmcompanionapp.data.bond.Bond;
+import pl.basicstuff.dmcompanionapp.data.bond.BondService;
 import pl.basicstuff.dmcompanionapp.data.characterclass.CharacterClass;
 import pl.basicstuff.dmcompanionapp.data.characterclass.CharacterClassService;
 import pl.basicstuff.dmcompanionapp.data.firstname.FirstName;
 import pl.basicstuff.dmcompanionapp.data.firstname.FirstNameService;
+import pl.basicstuff.dmcompanionapp.data.flaworsecret.FlawOrSecret;
+import pl.basicstuff.dmcompanionapp.data.flaworsecret.FlawOrSecretService;
 import pl.basicstuff.dmcompanionapp.data.interaction.Interaction;
 import pl.basicstuff.dmcompanionapp.data.interaction.InteractionService;
 import pl.basicstuff.dmcompanionapp.data.lastname.LastName;
@@ -29,6 +35,7 @@ import pl.basicstuff.dmcompanionapp.data.talent.TalentService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +53,9 @@ public class DataController {
     private final TalentService talentService;
     private final MannerismService mannerismService;
     private final InteractionService interactionService;
+    private final BondService bondService;
+    private final FlawOrSecretService flawOrSecretService;
+    private final AbilityService abilityService;
 
 
     @GetMapping("")
@@ -60,6 +70,9 @@ public class DataController {
         model.addAttribute("talentsCount", talentService.talentsList().size());
         model.addAttribute("mannerismsCount", mannerismService.mannerismsList().size());
         model.addAttribute("interactionsCount", interactionService.interactionsList().size());
+        model.addAttribute("bondsCount", bondService.bondsList().size());
+        model.addAttribute("flawsOrSecretsCount", flawOrSecretService.flawsOrSecretsList().size());
+        model.addAttribute("abilitiesCount", abilityService.abilitiesList().size());
         return "data/data";
     }
 
@@ -514,6 +527,144 @@ public class DataController {
         return "redirect:/admin/data/interaction";
     }
 
+    @GetMapping("/bond")
+    public String bondDashboard(Model model) {
+        model.addAttribute("bond", new Bond());
+        model.addAttribute("bonds", bondService.bondsList());
+        return "data/bond";
+    }
+
+    @PostMapping("/bond")
+    public String saveBond(@Valid Bond bond, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("bonds", bondService.bondsList());
+            return "data/bond";
+        }
+
+        bondService.saveBond(bond);
+        attributes.addFlashAttribute("Success", "Więź została dodana do bazy danych");
+        return "redirect:/admin/data/bond";
+    }
+
+    @GetMapping("/bond/{id}")
+    public String bondEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("bond", bondService.findBondById(id));
+        model.addAttribute("bonds", bondService.bondsList());
+        return "data/bond";
+    }
+
+    @PostMapping("/bond/{id}")
+    public String saveBondEdit(@Valid Bond bond, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("bonds", bondService.bondsList());
+            return "data/bond";
+        }
+
+        bondService.updateBond(bond);
+        attributes.addFlashAttribute("Success", "Więź została pomyślnie nadpisana");
+        return "redirect:/admin/data/bond";
+    }
+
+    @GetMapping("/bond/delete/{id}")
+    public String bondDelete(@PathVariable Long id, RedirectAttributes attributes) {
+        Bond bond = bondService.findBondById(id);
+        bondService.deleteBond(bond);
+        attributes.addFlashAttribute("Success", "Więź została pomyślnie usunięta");
+        return "redirect:/admin/data/bond";
+    }
+
+    @GetMapping("/flaw-or-secret")
+    public String flawOrSecretDashboard(Model model) {
+        model.addAttribute("flawOrSecret", new FlawOrSecret());
+        model.addAttribute("flawsOrSecrets", flawOrSecretService.flawsOrSecretsList());
+        return "data/flaw-or-secret";
+    }
+
+    @PostMapping("/flaw-or-secret")
+    public String saveFlawOrSecret(@Valid FlawOrSecret flawOrSecret, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("flawsOrSecrets", flawOrSecretService.flawsOrSecretsList());
+            return "data/flaw-or-secret";
+        }
+
+        flawOrSecretService.saveFlawOrSecret(flawOrSecret);
+        attributes.addFlashAttribute("Success", "Pomyślnie dodano słabość/tajemnicę");
+        return "redirect:/admin/data/flaw-or-secret";
+    }
+
+    @GetMapping("/flaw-or-secret/{id}")
+    public String flawOrSecretEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("flawOrSecret", flawOrSecretService.findFlawOrSecretById(id));
+        model.addAttribute("flawsOrSecrets", flawOrSecretService.flawsOrSecretsList());
+        return "data/flaw-or-secret";
+    }
+
+    @PostMapping("/flaw-or-secret/{id}")
+    public String saveFlawOrSecretEdit(@Valid FlawOrSecret flawOrSecret, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("flawsOrSecrets", flawOrSecretService.flawsOrSecretsList());
+            return "data/flaw-or-secret";
+        }
+
+        flawOrSecretService.updateFlawOrSecret(flawOrSecret);
+        attributes.addFlashAttribute("Success", "Pomyślnie nadpisano słabość/tajemnicę");
+        return "redirect:/admin/data/flaw-or-secret";
+    }
+
+    @GetMapping("/flaw-or-secret/delete/{id}")
+    public String flawOrSecretDelete(@PathVariable Long id, RedirectAttributes attributes) {
+        FlawOrSecret flawOrSecret = flawOrSecretService.findFlawOrSecretById(id);
+        flawOrSecretService.deleteFlawOrSecret(flawOrSecret);
+        attributes.addFlashAttribute("Success", "Pomyślnie usunięto słabość/tajemnicę");
+        return "redirect:/admin/data/flaw-or-secret";
+    }
+
+    @GetMapping("/ability")
+    public String abilityDashboard(Model model) {
+        model.addAttribute("ability", new Ability());
+        model.addAttribute("abilities", abilityService.abilitiesList());
+        return "data/ability";
+    }
+
+    @PostMapping("/ability")
+    public String saveAbility(@Valid Ability ability, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("abilities", abilityService.abilitiesList());
+            return "data/ability";
+        }
+
+        abilityService.saveAbility(ability);
+        attributes.addFlashAttribute("Success", "Umiejętność została dodana do bazy danych");
+        return "redirect:/admin/data/ability";
+    }
+
+    @GetMapping("/ability/{id}")
+    public String abilityEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("ability", abilityService.findAbilityById(id));
+        model.addAttribute("abilities", abilityService.abilitiesList());
+        return "data/ability";
+    }
+
+    @PostMapping("/ability/{id}")
+    public String saveAbilityEdit(@Valid Ability ability, BindingResult result, RedirectAttributes attributes, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("abilities", abilityService.abilitiesList());
+            return "data/ability";
+        }
+
+        abilityService.updateAbility(ability);
+        attributes.addFlashAttribute("Success", "Umiejętność została pomyślnie nadpisana");
+        return "redirect:/admin/data/ability";
+    }
+
+    @GetMapping("/ability/delete/{id}")
+    public String abilityDelete(@PathVariable Long id, RedirectAttributes attributes) {
+        Ability ability = abilityService.findAbilityById(id);
+        abilityService.deleteAbility(ability);
+        attributes.addFlashAttribute("Success", "Umiejętność została pomyślnie usunięta");
+        return "redirect:/admin/data/ability";
+    }
+
     @ModelAttribute("generalRacesList")
     public List<String> getGeneralRaces() {
         List<Race> races = raceService.racesList();
@@ -527,6 +678,19 @@ public class DataController {
                 .collect(Collectors.toList());
 
     }
+
+    @ModelAttribute("attributes")
+    public List<String> getAttributesList() {
+        return Arrays.asList("Siła", "Zręczność", "Kondycja", "Inteligencja", "Mądrość", "Charyzma");
+    }
+
+    @ModelAttribute("qualities")
+    public List<String> getQualitiesList() {
+        return Arrays.asList("Wysoka", "Niska");
+    }
+
+
+
 
 
 }

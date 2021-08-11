@@ -106,6 +106,30 @@
                                     code="list.details"/></a>
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.bond"/></th>
+                        <th scope="row">${bondsCount}</th>
+                        <td>
+                            <a href="/admin/data/bond" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.flawOrSecret"/></th>
+                        <th scope="row">${flawsOrSecretsCount}</th>
+                        <td>
+                            <a href="/admin/data/flaw-or-secret" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><spring:message code="char.abilities"/></th>
+                        <th scope="row">${abilitiesCount}</th>
+                        <td>
+                            <a href="/admin/data/ability" class="btn btn-info btn-sm"><spring:message
+                                    code="list.details"/></a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

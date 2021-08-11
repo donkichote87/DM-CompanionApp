@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `npcs` (
                         PRIMARY KEY (`id`),
                         KEY `FK8bih5gjwwupiralekg7t187m6` (`user_id`),
                         CONSTRAINT `FK8bih5gjwwupiralekg7t187m6` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 CREATE TABLE IF NOT EXISTS `players` (
                            `id` bigint NOT NULL AUTO_INCREMENT,
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `players` (
                            CONSTRAINT `FKacerj197wqdp3xm6lsy1vuuj7` FOREIGN KEY (`character_class_id`) REFERENCES `classes` (`id`),
                            CONSTRAINT `FKib4f8f03xdlynowtunidtf5i8` FOREIGN KEY (`background_id`) REFERENCES `backgrounds` (`id`),
                            CONSTRAINT `FKqinih0fh3c42gsamvg1cgh8un` FOREIGN KEY (`race_id`) REFERENCES `races` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 CREATE TABLE IF NOT EXISTS `occupations` (
                                `id` bigint NOT NULL AUTO_INCREMENT,
@@ -131,21 +131,21 @@ CREATE TABLE IF NOT EXISTS `appearances` (
                                `description` varchar(255) DEFAULT NULL,
                                PRIMARY KEY (`id`),
                                UNIQUE KEY `UK_qtl716ec7wgntp034klsqo4nc` (`description`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 CREATE TABLE IF NOT EXISTS `talents` (
                            `id` bigint NOT NULL AUTO_INCREMENT,
                            `description` varchar(255) DEFAULT NULL,
                            PRIMARY KEY (`id`),
                            UNIQUE KEY `UK_8gcfs9v96nw5o9vvofvhk5h31` (`description`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 CREATE TABLE IF NOT EXISTS `mannerisms` (
                               `id` bigint NOT NULL AUTO_INCREMENT,
                               `description` varchar(255) DEFAULT NULL,
                               PRIMARY KEY (`id`),
                               UNIQUE KEY `UK_qwuprr521el9sdecqh4juy40g` (`description`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 CREATE TABLE IF NOT EXISTS `interactions` (
                                 `id` bigint NOT NULL AUTO_INCREMENT,
@@ -154,4 +154,29 @@ CREATE TABLE IF NOT EXISTS `interactions` (
                                 PRIMARY KEY (`id`),
                                 UNIQUE KEY `UK_3btdrw6px39rwfool6sf22s5e` (`interaction_female`),
                                 UNIQUE KEY `UK_pka3cnmm5kybiht7ckonqtkxm` (`interaction_male`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+CREATE TABLE IF NOT EXISTS `abilities` (
+                             `id` bigint NOT NULL AUTO_INCREMENT,
+                             `description_female` varchar(60) DEFAULT NULL,
+                             `description_male` varchar(60) DEFAULT NULL,
+                             `quality` varchar(60) DEFAULT NULL,
+                             `trait` varchar(60) DEFAULT NULL,
+                             PRIMARY KEY (`id`),
+                             UNIQUE KEY `UK_cx626oxfgh85iyusie3owuwdd` (`description_female`),
+                             UNIQUE KEY `UK_a0h7ewdijg003w24dni3l12vw` (`description_male`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+CREATE TABLE IF NOT EXISTS `bonds` (
+                         `id` bigint NOT NULL AUTO_INCREMENT,
+                         `description` varchar(255) DEFAULT NULL,
+                         PRIMARY KEY (`id`),
+                         UNIQUE KEY `UK_l6f0f0hhl94cf4m7lsseevhwp` (`description`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+CREATE TABLE IF NOT EXISTS `flaws_or_secrets` (
+                                    `id` bigint NOT NULL AUTO_INCREMENT,
+                                    `description` varchar(255) DEFAULT NULL,
+                                    PRIMARY KEY (`id`),
+                                    UNIQUE KEY `UK_gfdm142rn8pojaxqwrkg01pp3` (`description`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;

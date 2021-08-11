@@ -32,9 +32,16 @@ public class OccupationService {
         return occupationRepository.findOccupationById(id);
     }
 
-    public Occupation getRandomOccupation() {
+    public String getRandomOccupation(String sex) {
         Random random = new Random();
         List<Occupation> occupations = occupationsList();
-        return occupations.get(random.nextInt(occupations.size()));
+        Occupation occupation = occupations.get(random.nextInt(occupations.size()));
+        if (sex.equals("M")) {
+            return occupation.getNameMale();
+
+        } else {
+            return occupation.getNameFemale();
+
+        }
     }
 }
