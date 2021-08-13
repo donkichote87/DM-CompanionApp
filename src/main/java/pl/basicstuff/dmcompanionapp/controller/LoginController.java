@@ -40,7 +40,7 @@ public class LoginController {
     @PostMapping("/register")
     public String add(@Valid User user, BindingResult result, RedirectAttributes attributes, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
         User validateEmail = userService.findByEmail(user.getEmail());
-        if (validateEmail != null) {
+        if (validateEmail != null && !validateEmail.getEmail().equals("")) {
             request.setAttribute("alreadyExist", "Użytkownik o podanym adresie email już istnieje");
             return "login/login";
         }
