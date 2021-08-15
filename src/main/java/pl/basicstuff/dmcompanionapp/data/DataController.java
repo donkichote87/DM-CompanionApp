@@ -823,6 +823,7 @@ public class DataController {
         for (Race race : races) {
             generalNames.add(race.getGeneralRace());
         }
+        generalNames.remove("Półelf");
         return generalNames.stream()
                 .distinct()
                 .collect(Collectors.toList());

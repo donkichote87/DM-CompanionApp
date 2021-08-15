@@ -17,7 +17,7 @@ public class User {
     private Long id;
     @Column(nullable = false, unique = true, length = 60)
     @NotBlank
-    @Size(min = 4)
+    @Size(min = 4, message = "{min.message}")
     @Pattern(regexp = "^\\S*$", message = "{username.space}")
     private String username;
     @Column(nullable = false, unique = true)

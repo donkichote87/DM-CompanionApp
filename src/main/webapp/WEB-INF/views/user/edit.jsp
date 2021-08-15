@@ -84,7 +84,7 @@
                     <div style="display: flex; justify-content: center"><spring:message code="delete.message"/></div>
                     <br>
                     <div class="d-grid gap-2">
-                        <a href="/user/delete" class="btn btn-lg btn-danger"><spring:message code="user.deleteButton"/></a>
+                        <a href="/user/confirm" class="btn btn-lg btn-danger"><spring:message code="user.deleteButton"/></a>
                     </div>
                 </div>
             </div>

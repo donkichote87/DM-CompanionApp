@@ -12188,3 +12188,8 @@ pre {
     display: flex;
     justify-content: center;
 }
+.error-int-player {
+    color:red;
+    display: flex;
+    justify-content: start;
+}

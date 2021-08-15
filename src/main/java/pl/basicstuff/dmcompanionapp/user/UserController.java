@@ -2,10 +2,12 @@ package pl.basicstuff.dmcompanionapp.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -109,9 +111,36 @@ public class UserController {
         return "redirect:email";
     }
 
+    @GetMapping("/confirm")
+    public String deleteUserConfirmation(Principal principal) {
+        User user = userService.findById(userId(principal));
+        if (user.getRole().getId() == 2) {
+            if (ifLastAdmin()) {
+                return "admin/no-change";
+            }
+        }
+        return "user/confirm";
+    }
+
+    @GetMapping("/delete")
+    public String deleteUser(Principal principal) {
+        User user = userService.findById(userId(principal));
+        userService.deleteUser(user);
+        SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+        return "redirect:/";
+    }
+
+
+
     public Long userId(Principal principal) {
         return userService.findByUserName(principal.getName()).getId();
     }
 
-
+    public boolean ifLastAdmin() {
+        List<User> admins = userService.findAllByRoleId(2);
+        if (admins.size() > 1) {
+            return false;
+        }
+        return true;
+    }
 }

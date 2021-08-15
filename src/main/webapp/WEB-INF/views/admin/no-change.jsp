@@ -15,7 +15,7 @@
             <p style="display: flex; justify-content: center"><spring:message code="admin.impossible"/></p>
             <br>
             <div style="display: flex; justify-content: space-evenly; justify-items: center">
-                <a href="/admin/dashboard" class="btn btn-info"><spring:message code="confirm.back"/></a>
+                <a href="/admin/dashboard" class="btn btn-info"><spring:message code="confirm.adminDashboard"/></a>
             </div>
         </div>
     </div>

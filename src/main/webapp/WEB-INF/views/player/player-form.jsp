@@ -111,28 +111,28 @@
                         <br>
                         <form:input path="strengthAbility"></form:input>
                         <br>
-                        <form:errors path="strengthAbility" cssClass="error"/>
+                        <form:errors path="strengthAbility" cssClass="error-int-player"/>
                     </div>
                     <div class="col-sm">
                         <spring:message code="player.condition"/>:
                         <br>
                         <form:input path="conditionAbility"></form:input>
                         <br>
-                        <form:errors path="conditionAbility" cssClass="error"/>
+                        <form:errors path="conditionAbility" cssClass="error-int-player"/>
                     </div>
                     <div class="col-sm">
                         <spring:message code="player.wisdom"/>:
                         <br>
                         <form:input path="wisdomAbility"></form:input>
                         <br>
-                        <form:errors path="wisdomAbility" cssClass="error"/>
+                        <form:errors path="wisdomAbility" cssClass="error-int-player"/>
                     </div>
                     <div class="col-sm">
                         <spring:message code="player.hp"/>:
                         <br>
                         <form:input path="hp"></form:input>
                         <br>
-                        <form:errors path="hp" cssClass="error"/>
+                        <form:errors path="hp" cssClass="error-int-player"/>
                     </div>
                 </div>
                 <div class="row">
@@ -141,28 +141,28 @@
                         <br>
                         <form:input path="dexterityAbility"></form:input>
                         <br>
-                        <form:errors path="dexterityAbility" cssClass="error"/>
+                        <form:errors path="dexterityAbility" cssClass="error-int-player"/>
                     </div>
                     <div class="col-sm">
                         <spring:message code="player.intelligence"/>:
                         <br>
                         <form:input path="intelligenceAbility"></form:input>
                         <br>
-                        <form:errors path="intelligenceAbility" cssClass="error"/>
+                        <form:errors path="intelligenceAbility" cssClass="error-int-player"/>
                     </div>
                     <div class="col-sm">
                         <spring:message code="player.charisma"/>:
                         <br>
                         <form:input path="charismaAbility"></form:input>
                         <br>
-                        <form:errors path="charismaAbility" cssClass="error"/>
+                        <form:errors path="charismaAbility" cssClass="error-int-player"/>
                     </div>
                     <div class="col-sm">
                         <spring:message code="player.hpDice"/>:
                         <br>
                         <form:input path="hpDice"></form:input>
                         <br>
-                        <form:errors path="hpDice" cssClass="error"/>
+                        <form:errors path="hpDice" cssClass="error-int-player"/>
                     </div>
                 </div>
                 <hr>

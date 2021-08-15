@@ -45,7 +45,8 @@ public class Player {
     private int wisdomAbility;
     private int charismaAbility;
     private int hp;
-    @Size(max = 4)
+
+    @Pattern(regexp = "^[kK][0-9]{1,2}", message = "{hp.dice}")
     private String hpDice;
     @Size(max = 255)
     private String flaw;

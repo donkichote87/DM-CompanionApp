@@ -6,6 +6,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.basicstuff.dmcompanionapp.npc.Npc;
+import pl.basicstuff.dmcompanionapp.npc.NpcService;
+import pl.basicstuff.dmcompanionapp.player.Player;
+import pl.basicstuff.dmcompanionapp.player.PlayerService;
 import pl.basicstuff.dmcompanionapp.role.Role;
 import pl.basicstuff.dmcompanionapp.role.RoleRepository;
 import pl.basicstuff.dmcompanionapp.user.User;
@@ -23,6 +27,8 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JavaMailSender mailSender;
+    private final NpcService npcService;
+    private final PlayerService playerService;
 
 
     public void saveUser(User user, String siteURL) throws MessagingException, UnsupportedEncodingException {
@@ -103,6 +109,15 @@ public class UserService {
     }
 
     public void deleteUser(User user) {
+        List<Npc> userNpcs = npcService.findNpcsByUserId(user.getId());
+        for (Npc npc : userNpcs) {
+            npcService.deleteNpc(npc);
+        }
+        List<Player> userPlayers = playerService.findAllByUserIdOrderByIdDesc(user.getId());
+        for (Player player : userPlayers) {
+            playerService.deletePlayer(player);
+        }
+
         userRepository.delete(user);
     }
 
