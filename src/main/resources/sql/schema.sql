@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`),
     KEY `FKp56c1712k691lhsyewcssf40f` (`role_id`),
     CONSTRAINT `FKp56c1712k691lhsyewcssf40f` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `races` (
     `id` bigint NOT NULL AUTO_INCREMENT,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `appearances` (
     `description` varchar(255) COLLATE utf8mb4_polish_ci DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_qtl716ec7wgntp034klsqo4nc` (`description`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+    ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `backgrounds` (
     `id` bigint NOT NULL AUTO_INCREMENT,
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `bonds` (
     `description` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_l6f0f0hhl94cf4m7lsseevhwp` (`description`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+    ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `classes` (
     `id` bigint NOT NULL AUTO_INCREMENT,
@@ -82,14 +82,14 @@ CREATE TABLE IF NOT EXISTS `first_names` (
     `sex` varchar(1) COLLATE utf8mb4_polish_ci NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_fvmlv6jddrc1tr7k1wwhi6ayd` (`name`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=469 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+    ) ENGINE=InnoDB AUTO_INCREMENT=469 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `flaws_or_secrets` (
     `id` bigint NOT NULL AUTO_INCREMENT,
     `description` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_gfdm142rn8pojaxqwrkg01pp3` (`description`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+    ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `ideals` (
     `id` bigint NOT NULL AUTO_INCREMENT,
@@ -114,14 +114,14 @@ CREATE TABLE IF NOT EXISTS `last_names` (
     `race` varchar(255) COLLATE utf8mb4_polish_ci DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_kmx7bv2jkqedg68voyxp2vul8` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `mannerisms` (
     `id` bigint NOT NULL AUTO_INCREMENT,
     `description` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_qwuprr521el9sdecqh4juy40g` (`description`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `npcs` (
     `id` bigint NOT NULL AUTO_INCREMENT,
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `npcs` (
     PRIMARY KEY (`id`),
     KEY `FK8bih5gjwwupiralekg7t187m6` (`user_id`),
     CONSTRAINT `FK8bih5gjwwupiralekg7t187m6` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `occupations` (
     `id` bigint NOT NULL AUTO_INCREMENT,
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `players` (
     CONSTRAINT `FKacerj197wqdp3xm6lsy1vuuj7` FOREIGN KEY (`character_class_id`) REFERENCES `classes` (`id`),
     CONSTRAINT `FKib4f8f03xdlynowtunidtf5i8` FOREIGN KEY (`background_id`) REFERENCES `backgrounds` (`id`),
     CONSTRAINT `FKqinih0fh3c42gsamvg1cgh8un` FOREIGN KEY (`race_id`) REFERENCES `races` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 
 
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `talents` (
     `description` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_8gcfs9v96nw5o9vvofvhk5h31` (`description`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `useful_knowledge` (
     `id` bigint NOT NULL AUTO_INCREMENT,
