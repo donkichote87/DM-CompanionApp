@@ -19,7 +19,8 @@ Wykorzystane technologie:
 -MySQL
 -Bootstrap
 
-Projekt jest wciąż rozwijany. W przypadku sugesti zachęcam do kontaktu.
+Projekt można przetestować na Heroku pod adresem: https://dm-companion-app.herokuapp.com/
+W przypadku sugesti zachęcam do kontaktu.
 
 _________________________________________________________________________________
 
@@ -41,4 +42,5 @@ Used technologies:
 -MySQL
 -Bootstrap
 
-Project is still in development phase. In case of suggestions, do not hesitate to reach to me.
+You can check this project on Heroku: https://dm-companion-app.herokuapp.com/
+In case of suggestions, do not hesitate to reach to me.
