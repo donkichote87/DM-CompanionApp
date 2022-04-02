@@ -11,6 +11,7 @@
     <groupId>pl.basicstuff</groupId>
     <artifactId>DM-CompanionApp</artifactId>
     <version>0.1.0</version>
+    <packaging>war</packaging>
     <name>DM-CompanionApp</name>
     <description>Schemat projektu koncowego</description>
     <properties>
@@ -63,7 +64,11 @@
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
