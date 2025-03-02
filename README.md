@@ -31,15 +31,6 @@ Wykorzystane technologie:
 
 -Bootstrap
 
-
-Projekt został umieszczony w chmurze AWS za pomocą serwisu Elastic Beanstalk gdzie można go przetestować: http://dm-companion-app.eu-central-1.elasticbeanstalk.com/
-
-Do zalogowania się w wersji umieszczonej na AWS można użyć loginu user i hasła [User123].
-
-
-Projekt można również przetestować na Heroku pod adresem: https://dm-companion-app.herokuapp.com/
-
-
 W przypadku sugesti zachęcam do kontaktu.
 
 _________________________________________________________________________________
@@ -73,13 +64,5 @@ Used technologies:
 -MySQL
 
 -Bootstrap
-
-
-Projekt was deployed to AWS using Elastic Beanstalk serivce and you can test it under address: http://dm-companion-app.eu-central-1.elasticbeanstalk.com/
-
-You can use login user i password [User123] to acces AWS deployed page.
-
-
-You can also check this project on Heroku: https://dm-companion-app.herokuapp.com/
 
 In case of suggestions, do not hesitate to reach to me.
